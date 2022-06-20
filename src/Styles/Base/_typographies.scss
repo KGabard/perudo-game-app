@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Stick&display=swap');
+
+$typographies: (
+  header: (
+    font-family: (
+      'Stick',
+      sans-serif,
+    ),
+    font-size: 40px,
+    font-weight: 400,
+  ),
+  title: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 24px,
+    font-weight: 700,
+  ),
+  subtitle: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 18px,
+    font-weight: 400,
+  ),
+  body: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 14px,
+    font-weight: 400,
+  ),
+  body-highlight: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 14px,
+    font-weight: 700,
+  ),
+  body-italic: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 14px,
+    font-weight: 400,
+    font-style: italic,
+  ),
+);

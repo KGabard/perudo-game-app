@@ -1,0 +1,18 @@
+@import "./Utils/variables";
+@import "./Base/typographies";
+@import "./Utils/mixins";
+@import "./Utils/functions";
+@import "./Utils/animations";
+@import "./Base/base";
+
+@import "./Components/navbar.scss";
+@import "./Components/dice.scss";
+@import "./Components/dices.scss";
+@import "./Components/bid.scss";
+@import "./Components/actionBar.scss";
+
+@import "./Layouts/header.scss";
+@import "./Layouts/footer.scss";
+@import "./Layouts/player.scss";
+@import "./Layouts/players.scss";
+@import "./Layouts/game-table.scss";

@@ -1,0 +1,25 @@
+.dices {
+  width: fit-content;
+  position: relative;
+  margin: auto;
+  gap: 8px;
+  &__list {
+    display: flex;
+    gap: 8px;
+  }
+  &__showBtn {
+    position: absolute;
+    right: 0px;
+    bottom: -20px;
+    @include typographies(body);
+    background-color: transparent;
+    color: $basic-white;
+    align-self: flex-end;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+    &:hover {
+        color: $highlight-secondary;
+    }
+  }
+}

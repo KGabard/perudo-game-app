@@ -1,0 +1,8 @@
+.dice {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    &.disabled {
+        opacity: 0.5;
+    }
+}

@@ -1,0 +1,9 @@
+.navbar {
+    list-style: none;
+    display: flex;
+    @include typographies(subtitle);
+    gap: 32px;
+    &__item {
+        cursor: pointer;
+    }
+}

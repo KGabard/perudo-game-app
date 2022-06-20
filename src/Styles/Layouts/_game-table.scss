@@ -1,0 +1,12 @@
+.gameTable {
+    max-width: 800px;
+    width: 100%;
+    border: 8px solid $basic-white;
+    border-radius: 32px;
+    min-height: fit-content;
+    flex-grow: 1;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

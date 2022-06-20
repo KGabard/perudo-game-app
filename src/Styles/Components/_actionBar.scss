@@ -1,0 +1,25 @@
+.actionBar {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 32px;
+  transition: opacity 0.2s ease-out;
+  &.actionBar--displayed {
+    height: fit-content;
+    opacity: 1;
+    transition: opacity 0.2s 0.2s ease-in;
+  }
+  &__bidBtn {
+    @include button
+  }
+  &__dudoBtn {
+    @include button
+  }
+  &__calzaBtn {
+    @include button
+  }
+}

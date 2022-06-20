@@ -1,0 +1,68 @@
+.player {
+  width: 640px;
+  height: 248px;
+  background-color: $neutral-primary;
+  border: 3px solid $neutral-secondary;
+  border-radius: 32px;
+  padding: 32px;
+  transition: background-color 0.1s 0.3s ease-out,
+    border-color 0.1s 0.3s ease-out, transform 0.3s ease-out, height 0.3s ease-out;
+  &.player--active {
+    background-color: $highlight-primary;
+    border-color: $highlight-secondary;
+    transform: scale(1.05);
+    transition: background-color 0.2s ease-in, border-color 0.2s ease-in,
+      transform 0.3s 0.1s ease-in, height 0.3s 0.1s ease-in;
+      &.player--human {
+        height: 328px;
+      }
+  }
+  &__grid {
+    width: 100%;
+    height: 178px;
+    display: grid;
+    grid-template-columns: 380px auto 1fr;
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    align-items: center;
+  }
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    height: 80px;
+    &__avatar {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      left: 0;
+    }
+    &__name {
+      @include typographies(header);
+    }
+  }
+  &__bidTitle {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & h2 {
+      @include typographies(title);
+    }
+  }
+  &__separator {
+    width: 0px;
+    height: 80%;
+    border-left: 3px solid $neutral-secondary;
+    border-radius: 3px;
+    grid-row: span 2;
+    transition: border-color 0.1s 0.3s ease-out;
+    &.player--active {
+      border-color: $highlight-secondary;
+      transition: border-color 0.1s ease-in;
+    }
+  }
+}
