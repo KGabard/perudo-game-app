@@ -6,3 +6,15 @@
 //         transform: rotate(180deg);
 //     }
 // }
+
+@keyframes neon {
+  0% {
+    color: $basic-white;
+  }
+  95% {
+    color: $highlight-secondary;
+  }
+  100% {
+    color: $basic-white;
+  }
+}

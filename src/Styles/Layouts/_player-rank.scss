@@ -1,0 +1,58 @@
+.playerRank {
+  width: $player-panel-width;
+  height: fit-content;
+  background: $neutral-primary;
+  border: 3px solid $neutral-secondary;
+  border-radius: 32px;
+  padding: 32px;
+  position: relative;
+  &.first {
+    background: linear-gradient(90deg, $basic-gold 0%, $neutral-primary 33%);
+    & .playerRank__rank {
+      text-shadow: 2px 2px 5px $basic-gold;
+      color: $basic-gold;
+    }
+  }
+  &.second {
+    background: linear-gradient(90deg, $basic-silver 0%, $neutral-primary 33%);
+    & .playerRank__rank {
+      text-shadow: 2px 2px 5px $basic-silver;
+      color: $basic-silver;
+    }
+  }
+  &.third {
+    background: linear-gradient(90deg, $basic-bronze 0%, $neutral-primary 33%);
+    & .playerRank__rank {
+      text-shadow: 2px 2px 5px $basic-bronze;
+      color: $basic-bronze;
+    }
+  }
+  &__rank {
+    position: absolute;
+    top: -2px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    @include typographies(header);
+    font-size: 56px;
+    text-shadow: 2px 2px 5px $neutral-secondary;
+    color: $neutral-secondary;
+  }
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    height: 80px;
+    &__avatar {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      right: 0;
+    }
+    &__name {
+      @include typographies(header);
+    }
+  }
+}

@@ -1,0 +1,82 @@
+.endTurnMessage {
+  @include message-window;
+  transition: width 0.3s ease-in;
+  position: relative;
+  &__header {
+    width: 100%;
+    text-align: center;
+    @include typographies(header);
+  }
+  &__title {
+    @include typographies(title);
+  }
+  &__subtitle {
+    @include typographies(subtitle);
+  }
+  &__body {
+    @include typographies(body);
+    text-align: justify;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+    transition: opacity 0.1s 0.3s ease-in;
+    white-space: pre-wrap;
+  }
+  &__expandBtn {
+    @include typographies(body-italic);
+    width: fit-content;
+    text-align: justify;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+    &:hover {
+      color: $neutral-secondary;
+    }
+  }
+  &__nextTurnBtn {
+    align-self: end;
+    @include button($next-turn-button-width, $next-turn-button-height);
+  }
+  &.wrong {
+    background-color: $wrong-primary;
+    border-color: $wrong-secondary;
+    & .endTurnMessage__expandBtn {
+      &:hover {
+        color: $wrong-secondary;
+      }
+    }
+    & .endTurnMessage__nextTurnBtn {
+      @include button(
+        $next-turn-button-width,
+        $next-turn-button-height,
+        $wrong-secondary
+      );
+    }
+  }
+  &.right {
+    background-color: $right-primary;
+    border-color: $right-secondary;
+    & .endTurnMessage__expandBtn {
+      &:hover {
+        color: $right-secondary;
+      }
+    }
+    & .endTurnMessage__nextTurnBtn {
+      @include button(
+        $next-turn-button-width,
+        $next-turn-button-height,
+        $right-secondary
+      );
+    }
+  }
+  &.expanded {
+    width: $player-panel-width;
+    & .endTurnMessage__body {
+      opacity: 1;
+      position: relative;
+      z-index: 0;
+    }
+    & .endTurnMessage__titleContainer {
+      margin: auto;
+    }
+  }
+}

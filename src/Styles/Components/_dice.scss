@@ -1,8 +1,21 @@
 .dice {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  &.disabled {
+    opacity: 0.5;
+  }
+  &__container {
     width: 56px;
     height: 56px;
-    border-radius: 8px;
-    &.disabled {
-        opacity: 0.5;
-    }
+    position: relative;
+  }
+  &__over {
+    position: absolute;
+    opacity: 0.5;
+    width: 56px;
+    height: 56px;
+    top: 0px;
+    left: 0px;
+  }
 }

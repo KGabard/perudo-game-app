@@ -3,8 +3,7 @@ import Dice from './Dice'
 import arrowBtn from '../Assets/Images/white-arrow.png'
 import arrowBtnHover from '../Assets/Images/blue-arrow.png'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateBidCount } from '../redux/store'
-import { updateBidValue } from '../redux/store'
+import { updateBidCount, updateBidValue } from '../redux/store'
 import { v4 as uuidv4 } from 'uuid'
 
 export default function Bid(props) {
@@ -15,15 +14,17 @@ export default function Bid(props) {
     diceRight: false,
   })
 
-  const playersData = useSelector((state) => state.players)
+  const game = useSelector((state) => state.game)
+
+  const activePlayers = useSelector((state) => state.players.activePlayers)
   const currentPlayer = props.playerData
   const dispatch = useDispatch()
 
-  const maxDiceCount = playersData.reduce((acc, item) => {
+  const totalPlayersDices = activePlayers.reduce((acc, item) => {
     return acc + item.dices.length
   }, 0)
 
-  const areArrowBtnsDisplayed = currentPlayer.isComputer
+  const isHumanPlaying = currentPlayer.isComputer
     ? false
     : currentPlayer.isActive
     ? true
@@ -33,9 +34,9 @@ export default function Bid(props) {
     let newCount = undefined
     isNaN(currentPlayer.bid.count)
       ? (newCount = 1)
-      : currentPlayer.bid.count < maxDiceCount
+      : currentPlayer.bid.count < totalPlayersDices
       ? (newCount = currentPlayer.bid.count + 1)
-      : (newCount = maxDiceCount)
+      : (newCount = totalPlayersDices)
     dispatch(updateBidCount({ player: currentPlayer, bidCount: newCount }))
   }
 
@@ -43,7 +44,7 @@ export default function Bid(props) {
     let newCount = undefined
     isNaN(currentPlayer.bid.count)
       ? (newCount = 1)
-      : currentPlayer.id.count > 1
+      : currentPlayer.bid.count > 1
       ? (newCount = currentPlayer.bid.count - 1)
       : (newCount = 1)
     dispatch(updateBidCount({ player: currentPlayer, bidCount: newCount }))
@@ -90,11 +91,25 @@ export default function Bid(props) {
 
   return (
     <div className="bid">
+      {isHumanPlaying && game.isPalifico && (
+        <div className="bid__palificoSign">
+          <span className="bid__palificoSign__letter">P</span>
+          <span className="bid__palificoSign__letter">a</span>
+          <span className="bid__palificoSign__letter">l</span>
+          <span className="bid__palificoSign__letter">i</span>
+          <span className="bid__palificoSign__letter">f</span>
+          <span className="bid__palificoSign__letter">i</span>
+          <span className="bid__palificoSign__letter">c</span>
+          <span className="bid__palificoSign__letter">o</span>
+          <span className="bid__palificoSign__letter"> </span>
+          <span className="bid__palificoSign__letter">!</span>
+        </div>
+      )}
       <div className="bid__countContainer">
         <div className="bid__count">
           {currentPlayer.bid.count ? currentPlayer.bid.count : ''}
         </div>
-        {areArrowBtnsDisplayed && (
+        {isHumanPlaying && (
           <img
             onMouseOver={() => toggleHoverTrue('countLeft')}
             onMouseOut={() => toggleHoverFalse()}
@@ -104,7 +119,7 @@ export default function Bid(props) {
             alt="Flèche gauche"
           ></img>
         )}
-        {areArrowBtnsDisplayed && (
+        {isHumanPlaying && (
           <img
             onMouseOver={() => toggleHoverTrue('countRight')}
             onMouseOut={() => toggleHoverFalse()}
@@ -122,7 +137,7 @@ export default function Bid(props) {
           isDisplayed={true}
           isDisabled={false}
         />
-        {areArrowBtnsDisplayed && (
+        {isHumanPlaying && (
           <img
             onMouseOver={() => toggleHoverTrue('diceLeft')}
             onMouseOut={() => toggleHoverFalse()}
@@ -132,7 +147,7 @@ export default function Bid(props) {
             alt="Flèche gauche"
           ></img>
         )}
-        {areArrowBtnsDisplayed && (
+        {isHumanPlaying && (
           <img
             onMouseOver={() => toggleHoverTrue('diceRight')}
             onMouseOut={() => toggleHoverFalse()}

@@ -2,21 +2,43 @@
 //     text-shadow: $offset $offset $colour;
 // }
 
-@mixin button($width: $button-width, $height: $button-height) {
-  width: 144px;
-  height: 48px;
+@mixin button($width: $button-width, $height: $button-height, $color: $highlight-secondary) {
+  width: $width;
+  height: $height;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 3px solid $highlight-secondary;
+  border: 3px solid $color;
   border-radius: 24px;
   @include typographies(title);
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
   &:hover {
-    background-color: $highlight-secondary;
+    background-color: $color;
   }
+}
+
+@mixin ok-btn($color: $neutral-secondary) {
+  @include button(80px, 40px);
+  border-color: $color;
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin message-window(
+  $primary-color: $neutral-primary,
+  $secondary-color: $neutral-secondary
+) {
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  gap: 16px;
+  background-color: $primary-color;
+  border: 3px solid $secondary-color;
+  border-radius: 32px;
 }
 
 @mixin tablet-and-mobile {

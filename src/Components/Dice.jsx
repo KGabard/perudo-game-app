@@ -6,10 +6,13 @@ import diceFace3 from '../Assets/Images/DiceFace3.png'
 import diceFace4 from '../Assets/Images/DiceFace4.png'
 import diceFace5 from '../Assets/Images/DiceFace5.png'
 import diceFace6 from '../Assets/Images/DiceFace6.png'
+import crossIcon from '../Assets/Images/CrossIcon.svg'
+import plusIcon from '../Assets/Images/PlusIcon.svg'
 
 export default function Dice(props) {
   let diceFace
   let isDisabled
+  let changeIcon
 
   switch (props.value) {
     case 1:
@@ -55,11 +58,28 @@ export default function Dice(props) {
       break
   }
 
+  switch (props.change) {
+    case 'x':
+      changeIcon = crossIcon
+      break;
+    case '+':
+      changeIcon = plusIcon
+      break;
+  
+    default:
+      changeIcon = undefined
+      break;
+  }
+
   return (
-    <img
-      src={diceFace}
-      alt="dé"
-      className={isDisabled ? 'dice disabled' : 'dice'}
-    />
+    <div className="dice__container">
+      <img
+        src={diceFace}
+        alt="dé"
+        className={isDisabled ? 'dice disabled' : 'dice'}
+      />
+      {changeIcon && <img src={changeIcon} alt="modification du dé" 
+        className='dice__over'/>}
+    </div>
   )
 }

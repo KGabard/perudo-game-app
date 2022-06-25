@@ -8,18 +8,18 @@ export default function Player(props) {
 
   const ref = useRef()
 
+  let className = 'player'
+  currentPlayer.isActive && (className += ' active')
+  !currentPlayer.isComputer && (className += ' human')
+  currentPlayer.isWrong && (className += ' wrong')
+  currentPlayer.isRight && (className += ' right')
+
+  // console.log(currentPlayer.name);
+  // console.log(currentPlayer.diceChanges);
+
   return (
     <>
-      <div
-        ref={ref}
-        className={
-          currentPlayer.isActive
-            ? !currentPlayer.isComputer
-              ? 'player player--active player--human'
-              : 'player player--active'
-            : 'player'
-        }
-      >
+      <div ref={ref} className={className}>
         <div className="player__grid">
           <div className="player__header">
             <img
@@ -29,19 +29,11 @@ export default function Player(props) {
             />
             <h1 className="player__header__name">{currentPlayer.name}</h1>
           </div>
-          <div
-            className={
-              currentPlayer.isActive
-                ? 'player__separator player--active'
-                : 'player__separator'
-            }
-          ></div>
+          <div className={'player__separator'}></div>
           <div className="player__bidTitle">
             <h2>Enchère</h2>
           </div>
-          <Dices
-            playerData={currentPlayer}
-          />
+          <Dices playerData={currentPlayer} />
           <Bid playerData={currentPlayer} />
         </div>
         <ActionBar playerData={currentPlayer} panelRef={ref} />

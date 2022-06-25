@@ -3,6 +3,10 @@
 $basic-black: black;
 $basic-white: white;
 
+$basic-gold: rgb(255, 217, 0);
+$basic-silver: rgb(190, 190, 190);
+$basic-bronze: rgb(216, 148, 0);
+
 $neutral-primary: #0e0e0e;
 $neutral-secondary: #282828;
 $neutral-tertiary: #fafafa;
@@ -16,5 +20,18 @@ $wrong-secondary: #c62121;
 $right-primary: #228013;
 $right-secondary: #56c621;
 
+
+$player-panel-width: 640px;
+$player-panel-height: 248px;
+$player-panel-height-expanded: 328px;
+
 $button-width: 144px;
 $button-height: 48px;
+
+$ok-button-width: 80px;
+$ok-button-height: 40px;
+
+$next-turn-button-width: 192px;
+$next-turn-button-height: 48px;
+
+$neon-delay: 0.1s;

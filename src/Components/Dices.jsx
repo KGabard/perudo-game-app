@@ -6,10 +6,10 @@ import { updateDicesDisplay } from '../redux/store'
 
 export default function Dices(props) {
   const currentPlayer = props.playerData
-  const gameData = useSelector((state) => state.game)
+  const game = useSelector((state) => state.game)
   const dispatch = useDispatch()
 
-  const maxDiceCount = gameData.playersMaxDiceCount
+  const maxDiceCount = game.playersMaxDiceCount
 
   const dicesDisabled = []
   for (let i = currentPlayer.dices.length; i < maxDiceCount; i++) {
@@ -17,34 +17,47 @@ export default function Dices(props) {
   }
 
   const showDices = () => {
-    dispatch(updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: true }))
+    if (game.isPause) return
+    dispatch(
+      updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: true })
+    )
   }
 
   const hideDices = () => {
-    dispatch(updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: false }))
+    if (game.isPause) return
+    dispatch(
+      updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: false })
+    )
   }
 
   return (
     <>
       <div className="dices">
         <ul className="dices__list">
-          {currentPlayer.dices.map((item) => {
+          {currentPlayer.dices.map((item, index) => {
             return (
               <Dice
                 key={uuidv4()}
                 value={item}
                 isDisplayed={currentPlayer.areDicesDisplayed}
                 isDisabled={false}
+                change={
+                  currentPlayer.diceChanges && currentPlayer.diceChanges[index]
+                }
               />
             )
           })}
-          {dicesDisabled.map((item) => {
+          {dicesDisabled.map((item, index) => {
             return (
               <Dice
                 key={uuidv4()}
                 value={item}
                 isDisplayed={currentPlayer.areDicesDisplayed}
                 isDisabled={true}
+                change={
+                  currentPlayer.diceChanges &&
+                  currentPlayer.diceChanges[index + currentPlayer.dices.length]
+                }
               />
             )
           })}
