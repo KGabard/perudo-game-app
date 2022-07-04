@@ -1,34 +1,11 @@
 import React from 'react'
 import Dice from './Dice'
 import { v4 as uuidv4 } from 'uuid'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateDicesDisplay } from '../redux/store'
+import useDices from '../hooks/useDices'
 
 export default function Dices(props) {
   const currentPlayer = props.playerData
-  const game = useSelector((state) => state.game)
-  const dispatch = useDispatch()
-
-  const maxDiceCount = game.playersMaxDiceCount
-
-  const dicesDisabled = []
-  for (let i = currentPlayer.dices.length; i < maxDiceCount; i++) {
-    dicesDisabled.push(undefined)
-  }
-
-  const showDices = () => {
-    if (game.isPause) return
-    dispatch(
-      updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: true })
-    )
-  }
-
-  const hideDices = () => {
-    if (game.isPause) return
-    dispatch(
-      updateDicesDisplay({ player: currentPlayer, areDicesDisplayed: false })
-    )
-  }
+  const { disabledDices, showDices, hideDices } = useDices()
 
   return (
     <>
@@ -47,7 +24,7 @@ export default function Dices(props) {
               />
             )
           })}
-          {dicesDisabled.map((item, index) => {
+          {disabledDices(currentPlayer).map((item, index) => {
             return (
               <Dice
                 key={uuidv4()}
@@ -64,9 +41,9 @@ export default function Dices(props) {
         </ul>
         {!currentPlayer.isComputer && currentPlayer.isActive && (
           <button
-            onMouseDown={showDices}
-            onMouseUp={hideDices}
-            onMouseOut={hideDices}
+            onMouseDown={() => showDices(currentPlayer)}
+            onMouseUp={() => hideDices(currentPlayer)}
+            onMouseOut={() => hideDices(currentPlayer)}
             className={'dices__showBtn'}
           >
             Montrer

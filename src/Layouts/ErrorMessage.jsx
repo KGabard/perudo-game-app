@@ -1,10 +1,13 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import useGameData from '../hooks/useGameData'
+import usePlayersData from '../hooks/usePlayersData'
 import { hideErrorMessage, updateHasToPlay } from '../redux/store'
 
 export default function ErrorMessage() {
-  const activePlayers = useSelector((state) => state.players.activePlayers)
-  const game = useSelector((state) => state.game)
+  const { activePlayers } = usePlayersData()
+  const { game } = useGameData()
+
   const dispatch = useDispatch()
 
   const closeErrorMessage = () => {

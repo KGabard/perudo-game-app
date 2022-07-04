@@ -1,34 +1,42 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import useGameData from '../hooks/useGameData'
+import usePlayersData from '../hooks/usePlayersData'
+import useResetPlayers from '../hooks/useResetPlayers'
 import Player from './Player'
 import PlayerRank from './PlayerRank'
 
 export default function Players() {
-  const activePlayers = useSelector((state) => state.players.activePlayers)
+  const { activePlayers, eliminatedPlayers } = usePlayersData()
+  const { game } = useGameData()
+  const { resetPlayer } = useResetPlayers()
 
-  const eliminatedPlayers = useSelector(
-    (state) => state.players.eliminatedPlayers
-  )
-
-  if (activePlayers.length <= 1) {
-    console.log('La partie est terminée')
-    console.log(`Le gagnant est ${activePlayers[0].name}`)
-    eliminatedPlayers.map((item, index) =>
-      console.log(`${index + 2}eme : ${item.name}`)
-    )
-  }
+  useEffect(() => {
+    activePlayers.forEach((item) => {
+      resetPlayer(item)
+    })
+  }, [])
 
   return (
     <div className="players">
-      {activePlayers.length > 1
-        ? activePlayers.map((item) => {
-            return (
-              !item.isEliminated && <Player key={item.id} playerData={item} />
-            )
+      {!game.isOver &&
+        activePlayers.map((item) => {
+          return (
+            !item.isEliminated && <Player key={item.id} playerData={item} />
+          )
+        })}
+
+      {
+        //! Rajouter un entête qui précise que la partie est finie est que le classement est le suivant
+        game.isOver &&
+          activePlayers.map((item) => {
+            return <PlayerRank key={item.id} playerData={item} rank={0} />
           })
-        : eliminatedPlayers.map((item) => {
-            return <PlayerRank key={item.id} playerData={item} />
-          })}
+      }
+      {game.isOver &&
+        eliminatedPlayers.map((item, index) => {
+          return <PlayerRank key={item.id} playerData={item} rank={index + 1} />
+        })}
     </div>
   )
 }

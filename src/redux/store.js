@@ -15,51 +15,45 @@ const playersSlice = createSlice({
     activePlayers: [
       {
         id: uuidv4(),
-        index: 1,
         name: 'Kevin',
         avatar: playerImage1,
-        diceCount: 2,
+        diceCount: 5,
         dices: [],
         diceChanges: [],
         isComputer: false,
         isActive: false,
         areDicesDisplayed: false,
         bid: { count: undefined, value: undefined },
-        hasToReset: true,
         hasToPlay: true,
         isWrong: false,
         isRight: false,
       },
       {
         id: uuidv4(),
-        index: 2,
-        name: 'Ordi 1',
+        name: 'Cecile',
         avatar: playerImage2,
-        diceCount: 2,
+        diceCount: 5,
         dices: [],
         diceChanges: [],
         isComputer: true,
         isActive: false,
         areDicesDisplayed: false,
         bid: { count: undefined, value: undefined },
-        hasToReset: true,
         hasToPlay: false,
         isWrong: false,
         isRight: false,
       },
       {
         id: uuidv4(),
-        index: 3,
-        name: 'Ordi 2',
+        name: 'Anaïs',
         avatar: playerImage3,
-        diceCount: 2,
+        diceCount: 5,
         dices: [],
         diceChanges: [],
         isComputer: true,
         isActive: false,
         areDicesDisplayed: false,
         bid: { count: undefined, value: undefined },
-        hasToReset: true,
         hasToPlay: false,
         isWrong: false,
         isRight: false,
@@ -80,15 +74,11 @@ const playersSlice = createSlice({
       )
       player.bid.value = action.payload.bidValue
     },
-    updateActivePlayer: (state, action) => {
-      state.activePlayers.map((item) => (item.isActive = false))
+    updateIsActive: (state, action) => {
       const player = state.activePlayers.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.player.id
       )
-      player.isActive = true
-    },
-    desactivateAllPlayers: (state) => {
-      state.activePlayers.map((item) => (item.isActive = false))
+      player.isActive = action.payload.isActive
     },
     updateDicesDisplay: (state, action) => {
       const player = state.activePlayers.find(
@@ -115,36 +105,11 @@ const playersSlice = createSlice({
       )
       player.diceChanges = action.payload.diceChanges
     },
-    updateHasToReset: (state, action) => {
-      const player = state.activePlayers.find(
-        (item) => item.id === action.payload.player.id
-      )
-      player.hasToReset = action.payload.hasToReset
-    },
     updateHasToPlay: (state, action) => {
       const player = state.activePlayers.find(
         (item) => item.id === action.payload.player.id
       )
       player.hasToPlay = action.payload.hasToPlay
-    },
-    eliminatePlayer: (state, action) => {
-      const player = state.activePlayers.find(
-        (item) => item.id === action.payload.id
-      )
-      state.activePlayers = state.activePlayers.filter(
-        (item) => item.id !== player.id
-      )
-      state.eliminatedPlayers.unshift(player)
-      return state
-    },
-    updateIndex: (state, action) => {
-      const player = state.activePlayers.find(
-        (item) => item.id === action.payload.id
-      )
-      if (player) {
-        player.index =
-          state.activePlayers.findIndex((item) => item.id === player.id) + 1
-      }
     },
     updateIsWrong: (state, action) => {
       const player = state.activePlayers.find(
@@ -164,25 +129,39 @@ const playersSlice = createSlice({
         item.isRight = false
       })
     },
+    // updateActivePlayers: (state, action) => {
+    //   state.activePlayers = action.payload
+    //   return state
+    // },
+    // updateEliminatedPlayers: (state, action) => {
+    //   state.eliminatedPlayers = action.payload
+    //   return state
+    // },
+    eliminatePlayer: (state, action) => {
+      state.activePlayers = state.activePlayers.filter(
+        (item) => item.id !== action.payload.id
+      )
+      state.eliminatedPlayers.unshift(action.payload)
+      return state
+    },
   },
 })
 
 export const {
   updateBidCount,
   updateBidValue,
-  updateActivePlayer,
-  desactivateAllPlayers,
+  updateIsActive,
   updateDicesDisplay,
   updateDiceCount,
   updateDices,
   updateDiceChanges,
-  updateHasToReset,
   updateHasToPlay,
-  eliminatePlayer,
-  updateIndex,
   updateIsWrong,
   updateIsRight,
   resetWrongRightAllPlayers,
+  // updateActivePlayers,
+  // updateEliminatedPlayers,
+  eliminatePlayer,
 } = playersSlice.actions
 
 const gameSlice = createSlice({
@@ -190,6 +169,7 @@ const gameSlice = createSlice({
   initialState: {
     isPause: false,
     isPalifico: false,
+    isOver: false,
     errorMessage: {
       isDisplayed: false,
       title: 'Title',
@@ -198,23 +178,27 @@ const gameSlice = createSlice({
     endTurnMessage: {
       isDisplayed: false,
       isWrong: false,
+      isRight: false,
       header: 'Dudo !',
       title: 'Title',
       subtitle: 'Body',
       body: 'Expanded body',
       isExpanded: false,
     },
-    playersMaxDiceCount: 5,
+    maxDicesPerPlayer: 5,
     turnCounter: 1,
   },
   reducers: {
-    updatePause: (state) => {
+    updateIsPause: (state) => {
       state.errorMessage.isDisplayed || state.endTurnMessage.isDisplayed
         ? (state.isPause = true)
         : (state.isPause = false)
     },
-    updatePalifico: (state, action) => {
+    updateIsPalifico: (state, action) => {
       state.isPalifico = action.payload
+    },
+    updateIsOver: (state, action) => {
+      state.isOver = action.payload
     },
     incrementTurnCounter: (state) => {
       state.turnCounter = state.turnCounter + 1
@@ -232,6 +216,7 @@ const gameSlice = createSlice({
       const message = action.payload
       state.endTurnMessage.isDisplayed = true
       state.endTurnMessage.isWrong = message.isWrong
+      state.endTurnMessage.isRight = message.isRight
       state.endTurnMessage.header = message.header
       state.endTurnMessage.title = message.title
       state.endTurnMessage.subtitle = message.subtitle
@@ -248,8 +233,9 @@ const gameSlice = createSlice({
 })
 
 export const {
-  updatePause,
-  updatePalifico,
+  updateIsPause,
+  updateIsPalifico,
+  updateIsOver,
   incrementTurnCounter,
   displayErrorMessage,
   hideErrorMessage,

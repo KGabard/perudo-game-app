@@ -14,9 +14,6 @@ export default function Player(props) {
   currentPlayer.isWrong && (className += ' wrong')
   currentPlayer.isRight && (className += ' right')
 
-  // console.log(currentPlayer.name);
-  // console.log(currentPlayer.diceChanges);
-
   return (
     <>
       <div ref={ref} className={className}>

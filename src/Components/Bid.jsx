@@ -1,93 +1,29 @@
-import React, { useState } from 'react'
 import Dice from './Dice'
 import arrowBtn from '../Assets/Images/white-arrow.png'
 import arrowBtnHover from '../Assets/Images/blue-arrow.png'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateBidCount, updateBidValue } from '../redux/store'
 import { v4 as uuidv4 } from 'uuid'
+import useBidData from '../hooks/useBidData'
+import useGameData from '../hooks/useGameData'
+import useArrowBtns from '../hooks/useArrowBtns'
 
 export default function Bid(props) {
-  const [areArrowBtnsHovered, setAreArrowBtnsHovered] = useState({
-    countLeft: false,
-    countRight: false,
-    diceLeft: false,
-    diceRight: false,
-  })
-
-  const game = useSelector((state) => state.game)
-
-  const activePlayers = useSelector((state) => state.players.activePlayers)
   const currentPlayer = props.playerData
-  const dispatch = useDispatch()
+  const { game } = useGameData()
+  const {
+    increaseBidCount,
+    decreaseBidCount,
+    increaseBidValue,
+    decreaseBidValue,
+  } = useBidData()
 
-  const totalPlayersDices = activePlayers.reduce((acc, item) => {
-    return acc + item.dices.length
-  }, 0)
+  const { areArrowBtnsHovered, toggleHoverTrue, toggleHoverFalse } =
+    useArrowBtns()
 
   const isHumanPlaying = currentPlayer.isComputer
     ? false
     : currentPlayer.isActive
     ? true
     : false
-
-  const increaseBidCount = () => {
-    let newCount = undefined
-    isNaN(currentPlayer.bid.count)
-      ? (newCount = 1)
-      : currentPlayer.bid.count < totalPlayersDices
-      ? (newCount = currentPlayer.bid.count + 1)
-      : (newCount = totalPlayersDices)
-    dispatch(updateBidCount({ player: currentPlayer, bidCount: newCount }))
-  }
-
-  const decreaseBidCount = () => {
-    let newCount = undefined
-    isNaN(currentPlayer.bid.count)
-      ? (newCount = 1)
-      : currentPlayer.bid.count > 1
-      ? (newCount = currentPlayer.bid.count - 1)
-      : (newCount = 1)
-    dispatch(updateBidCount({ player: currentPlayer, bidCount: newCount }))
-  }
-
-  const increaseBidValue = () => {
-    let newValue = undefined
-    isNaN(currentPlayer.bid.value)
-      ? (newValue = 1)
-      : currentPlayer.bid.value < 6
-      ? (newValue = currentPlayer.bid.value + 1)
-      : (newValue = 1)
-    dispatch(updateBidValue({ player: currentPlayer, bidValue: newValue }))
-  }
-
-  const decreaseBidValue = () => {
-    let newValue = undefined
-    isNaN(currentPlayer.bid.value)
-      ? (newValue = 1)
-      : currentPlayer.bid.value > 1
-      ? (newValue = currentPlayer.bid.value - 1)
-      : (newValue = 6)
-    dispatch(updateBidValue({ player: currentPlayer, bidValue: newValue }))
-  }
-
-  const toggleHoverTrue = (type) => {
-    setAreArrowBtnsHovered({
-      countLeft: false,
-      countRight: false,
-      diceLeft: false,
-      diceRight: false,
-      [type]: true,
-    })
-  }
-
-  const toggleHoverFalse = () => {
-    setAreArrowBtnsHovered({
-      countLeft: false,
-      countRight: false,
-      diceLeft: false,
-      diceRight: false,
-    })
-  }
 
   return (
     <div className="bid">
@@ -113,7 +49,7 @@ export default function Bid(props) {
           <img
             onMouseOver={() => toggleHoverTrue('countLeft')}
             onMouseOut={() => toggleHoverFalse()}
-            onClick={() => decreaseBidCount()}
+            onClick={() => decreaseBidCount(currentPlayer)}
             src={areArrowBtnsHovered.countLeft ? arrowBtnHover : arrowBtn}
             className="bid__countLeftArrow"
             alt="Flèche gauche"
@@ -123,7 +59,7 @@ export default function Bid(props) {
           <img
             onMouseOver={() => toggleHoverTrue('countRight')}
             onMouseOut={() => toggleHoverFalse()}
-            onClick={() => increaseBidCount()}
+            onClick={() => increaseBidCount(currentPlayer)}
             src={areArrowBtnsHovered.countRight ? arrowBtnHover : arrowBtn}
             className="bid__countRightArrow"
             alt="Flèche droite"
@@ -141,7 +77,7 @@ export default function Bid(props) {
           <img
             onMouseOver={() => toggleHoverTrue('diceLeft')}
             onMouseOut={() => toggleHoverFalse()}
-            onClick={() => decreaseBidValue()}
+            onClick={() => decreaseBidValue(currentPlayer)}
             src={areArrowBtnsHovered.diceLeft ? arrowBtnHover : arrowBtn}
             className="bid__diceLeftArrow"
             alt="Flèche gauche"
@@ -151,7 +87,7 @@ export default function Bid(props) {
           <img
             onMouseOver={() => toggleHoverTrue('diceRight')}
             onMouseOut={() => toggleHoverFalse()}
-            onClick={() => increaseBidValue()}
+            onClick={() => increaseBidValue(currentPlayer)}
             src={areArrowBtnsHovered.diceRight ? arrowBtnHover : arrowBtn}
             className="bid__diceRightArrow"
             alt="Flèche droite"

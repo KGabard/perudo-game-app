@@ -1,18 +1,15 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  hideEndTurnMessage,
-  expandEndTurnMessage,
-  updateHasToReset,
-  updateHasToPlay,
-  incrementTurnCounter,
-} from '../redux/store'
+import { useDispatch } from 'react-redux'
+import useEndTurnMessage from '../hooks/useEndTurnMessage'
+import useGameData from '../hooks/useGameData'
+import { expandEndTurnMessage } from '../redux/store'
 
 export default function EndTurnMessage() {
-  const activePlayers = useSelector((state) => state.players.activePlayers)
-  const game = useSelector((state) => state.game)
+  const { game } = useGameData()
+  const { nextTurn } = useEndTurnMessage()
+
   const dispatch = useDispatch()
 
   const ref = useRef()
@@ -25,23 +22,9 @@ export default function EndTurnMessage() {
   }, [])
 
   let className = 'endTurnMessage'
-  game.endTurnMessage.isWrong
-    ? (className += ' wrong')
-    : (className += ' right')
+  game.endTurnMessage.isWrong && (className += ' wrong')
+  game.endTurnMessage.isRight && (className += ' right')
   game.endTurnMessage.isExpanded && (className += ' expanded')
-
-  const nextTurn = () => {
-    activePlayers.forEach((item) => {
-      dispatch(updateHasToReset({ player: item, hasToReset: true }))
-      item.isWrong &&
-        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
-      item.isRight &&
-        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
-    })
-    dispatch(hideEndTurnMessage())
-    dispatch(incrementTurnCounter())
-    
-  }
 
   return (
     <div ref={ref} className={className}>
