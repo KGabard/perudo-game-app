@@ -12,15 +12,12 @@ import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 
 export default function useActions() {
-
   const activePlayers = useSelector((state) => state.players.activePlayers)
-  const game = useSelector(state => state.game)
+  const game = useSelector((state) => state.game)
 
-
-  const { nextPlayer, previousPlayer, desactivateAllPlayers } =
-    usePlayersData()
+  const { nextPlayer, previousPlayer, desactivateAllPlayers } = usePlayersData()
   const { checkIsPalifico } = useGameData()
-  const { setBidCount, setBidValue, checkBidProposal, checkBid, currentBid } =
+  const { setBidCount, setBidValue, checkBidProposal, checkBid, previousBid } =
     useBidData()
   const { removeDice, addDice, showPlayersDices } = useDices()
   const { createEndTurnMessage } = useEndTurnMessage()
@@ -56,7 +53,7 @@ export default function useActions() {
       return
     }
 
-    if (isNaN(currentBid().count) || isNaN(currentBid().value)) {
+    if (isNaN(previousBid(player).count) || isNaN(previousBid(player).value)) {
       dispatch(
         displayErrorMessage({
           title: "L'enchère précédente n'est pas définie.",
@@ -64,19 +61,15 @@ export default function useActions() {
         })
       )
     } else {
-      if (checkBid(currentBid(), type)) {
+      if (checkBid(previousBid(player), type)) {
         switch (type) {
           case 'dudo':
             removeDice(player)
             dispatch(updateIsWrong({ player: player, isWrong: true }))
-            // player.diceCount - 1 === 1
-            //   ? dispatch(updateIsPalifico(true))
-            //   : dispatch(updateIsPalifico(false))
             break
           case 'calza':
             addDice(player)
             dispatch(updateIsRight({ player: player, isRight: true }))
-            // dispatch(updateIsPalifico(false))
             break
           default:
             break
@@ -88,16 +81,10 @@ export default function useActions() {
             dispatch(
               updateIsWrong({ player: previousPlayer(player), isWrong: true })
             )
-            // previousPlayer(player).diceCount - 1 === 1
-            //   ? dispatch(updateIsPalifico(true))
-            //   : dispatch(updateIsPalifico(false))
             break
           case 'calza':
             removeDice(player)
             dispatch(updateIsWrong({ player: player, isWrong: true }))
-            // player.diceCount - 1 === 1
-            //   ? dispatch(updateIsPalifico(true))
-            //   : dispatch(updateIsPalifico(false))
             break
           default:
             break
@@ -109,7 +96,6 @@ export default function useActions() {
         dispatch(updateHasToPlay({ player: item, hasToPlay: false }))
       })
       createEndTurnMessage(player, type)
-      // checkIsPalifico()
     }
   }
 

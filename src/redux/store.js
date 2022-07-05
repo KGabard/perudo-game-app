@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import playerImage1 from '../Assets/Images/PlayerImage1.png'
 import playerImage2 from '../Assets/Images/PlayerImage2.png'
 import playerImage3 from '../Assets/Images/PlayerImage3.png'
-// import playerImage4 from '../Assets/Images/PlayerImage4.png'
+import playerImage4 from '../Assets/Images/PlayerImage4.png'
 // import playerImage5 from '../Assets/Images/PlayerImage5.png'
 // import playerImage6 from '../Assets/Images/PlayerImage6.png'
 
@@ -15,12 +15,12 @@ const playersSlice = createSlice({
     activePlayers: [
       {
         id: uuidv4(),
-        name: 'Kevin',
+        name: 'Papa',
         avatar: playerImage1,
         diceCount: 5,
         dices: [],
         diceChanges: [],
-        isComputer: false,
+        isComputer: true,
         isActive: false,
         areDicesDisplayed: false,
         bid: { count: undefined, value: undefined },
@@ -30,7 +30,7 @@ const playersSlice = createSlice({
       },
       {
         id: uuidv4(),
-        name: 'Cecile',
+        name: 'Maman',
         avatar: playerImage2,
         diceCount: 5,
         dices: [],
@@ -45,8 +45,23 @@ const playersSlice = createSlice({
       },
       {
         id: uuidv4(),
-        name: 'Anaïs',
+        name: 'Kevin',
         avatar: playerImage3,
+        diceCount: 5,
+        dices: [],
+        diceChanges: [],
+        isComputer: true,
+        isActive: false,
+        areDicesDisplayed: false,
+        bid: { count: undefined, value: undefined },
+        hasToPlay: false,
+        isWrong: false,
+        isRight: false,
+      },
+      {
+        id: uuidv4(),
+        name: 'Cecile',
+        avatar: playerImage4,
         diceCount: 5,
         dices: [],
         diceChanges: [],
@@ -129,14 +144,6 @@ const playersSlice = createSlice({
         item.isRight = false
       })
     },
-    // updateActivePlayers: (state, action) => {
-    //   state.activePlayers = action.payload
-    //   return state
-    // },
-    // updateEliminatedPlayers: (state, action) => {
-    //   state.eliminatedPlayers = action.payload
-    //   return state
-    // },
     eliminatePlayer: (state, action) => {
       state.activePlayers = state.activePlayers.filter(
         (item) => item.id !== action.payload.id
@@ -159,8 +166,6 @@ export const {
   updateIsWrong,
   updateIsRight,
   resetWrongRightAllPlayers,
-  // updateActivePlayers,
-  // updateEliminatedPlayers,
   eliminatePlayer,
 } = playersSlice.actions
 
@@ -187,6 +192,7 @@ const gameSlice = createSlice({
     },
     maxDicesPerPlayer: 5,
     turnCounter: 1,
+    computerBluff: true,
   },
   reducers: {
     updateIsPause: (state) => {

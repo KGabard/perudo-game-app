@@ -1,5 +1,10 @@
 import { useDispatch } from 'react-redux'
-import { displayEndTurnMessage, hideEndTurnMessage, incrementTurnCounter, updateHasToPlay } from '../redux/store'
+import {
+  displayEndTurnMessage,
+  hideEndTurnMessage,
+  incrementTurnCounter,
+  updateHasToPlay,
+} from '../redux/store'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import useGameData from './useGameData'
@@ -9,9 +14,9 @@ import useResetPlayers from './useResetPlayers'
 export default function useEndTurnMessage() {
   const { activePlayers, previousPlayer } = usePlayersData()
   const { game, checkIsPalifico } = useGameData()
-  const { checkBid, currentBid } = useBidData()
+  const { checkBid, previousBid } = useBidData()
   const { countDiceOf, hidePlayersDices } = useDices()
-  const {resetPlayer} = useResetPlayers()
+  const { resetPlayer } = useResetPlayers()
 
   const dispatch = useDispatch()
 
@@ -19,8 +24,12 @@ export default function useEndTurnMessage() {
     let message
 
     message = `L'enchère annoncée par ${previousPlayer(player).name} est de ${
-      currentBid().count
-    } ${currentBid().value === 1 ? 'Paco' : `dés de ${currentBid().value}`}.`
+      previousBid(player).count
+    } ${
+      previousBid(player).value === 1
+        ? 'Paco'
+        : `dés de ${previousBid(player).value}`
+    }.`
 
     switch (type) {
       case 'dudo':
@@ -35,19 +44,23 @@ export default function useEndTurnMessage() {
 
     message += '\n\n'
 
-    game.isPalifico || currentBid().value === 1
-      ? (message += `En tout il y a ${countDiceOf(currentBid().value)} ${
-          currentBid().value === 1 ? 'Paco' : `dés de ${currentBid().value}`
+    game.isPalifico || previousBid(player).value === 1
+      ? (message += `En tout il y a ${countDiceOf(previousBid(player).value)} ${
+          previousBid(player).value === 1
+            ? 'Paco'
+            : `dés de ${previousBid(player).value}`
         }.`)
-      : (message += `En tout il y a ${countDiceOf(currentBid().value)} dés de ${
-          currentBid().value
-        } et ${countDiceOf(1)} Paco, soit ${
-          countDiceOf(currentBid().value) + countDiceOf(1)
-        } dés de ${currentBid().value}.`)
+      : (message += `En tout il y a ${countDiceOf(
+          previousBid(player).value
+        )} dés de ${previousBid(player).value} et ${countDiceOf(
+          1
+        )} Paco, soit ${
+          countDiceOf(previousBid(player).value) + countDiceOf(1)
+        } dés de ${previousBid(player).value}.`)
 
     message += '\n\n'
 
-    if (checkBid(currentBid(), type)) {
+    if (checkBid(previousBid(player), type)) {
       message += `L'enchère est donc validée.`
       switch (type) {
         case 'dudo':
@@ -65,7 +78,8 @@ export default function useEndTurnMessage() {
       switch (type) {
         case 'dudo':
           message += ` ${previousPlayer(player).name} perd un dé`
-          if (previousPlayer(player).diceCount <= 1) message += ` et est éliminé`
+          if (previousPlayer(player).diceCount <= 1)
+            message += ` et est éliminé`
           break
         case 'calza':
           message += ` ${player.name} perd un dé`
@@ -82,8 +96,6 @@ export default function useEndTurnMessage() {
   }
 
   const createEndTurnMessage = (player, type) => {
-
-
     let endTurnMessage = {
       isWrong: false,
       isRight: false,
@@ -93,7 +105,7 @@ export default function useEndTurnMessage() {
       body: '',
     }
 
-    if (checkBid(currentBid(), type)) {
+    if (checkBid(previousBid(player), type)) {
       endTurnMessage.isRight = true
       endTurnMessage.title = "L'enchère est validée."
       switch (type) {
@@ -142,9 +154,9 @@ export default function useEndTurnMessage() {
     checkIsPalifico()
     activePlayers.forEach((item) => {
       item.isWrong &&
-      dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
       item.isRight &&
-      dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
       resetPlayer(item)
     })
     dispatch(hideEndTurnMessage())

@@ -6,6 +6,7 @@ import useGameData from '../hooks/useGameData'
 import { updateHasToPlay } from '../redux/store'
 import useActions from '../hooks/useActions'
 import useComputer from '../hooks/useComputer'
+import useBidData from '../hooks/useBidData'
 
 export default function ActionBar(props) {
   const [play, setPlay] = useState({ isPlaying: false, payload: '' })
@@ -16,6 +17,8 @@ export default function ActionBar(props) {
   const { game } = useGameData()
   const { makeBid, endTurn } = useActions()
   const { computerPlay } = useComputer()
+
+  const { previousBid } = useBidData()
 
   const dispatch = useDispatch()
 
@@ -40,12 +43,13 @@ export default function ActionBar(props) {
 
   useEffect(() => {
     if (currentPlayer.hasToPlay) {
+      console.log(`${currentPlayer.name} joue:`);
       dispatch(updateHasToPlay({ player: currentPlayer, hasToPlay: false }))
       activatePlayer(currentPlayer, props.panelRef)
       currentPlayer.isComputer &&
         setTimeout(() => {
           setPlay(computerPlay(currentPlayer))
-        }, 200)
+        }, 1000)
     }
   }, [currentPlayer.hasToPlay])
 

@@ -16,6 +16,7 @@ export default function useResetPlayers() {
   const dispatch = useDispatch()
 
   const resetPlayer = (player) => {
+    console.log(`Reset ${player.name}`);
     dispatch(resetWrongRightAllPlayers())
     randomizePlayerDices(player)
     resetPlayerDiceChanges(player)

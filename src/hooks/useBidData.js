@@ -77,12 +77,13 @@ export default function useBidData() {
     }
   }
 
-  const currentBid = () => {
-    const currentPlayer = activePlayers.find((item) => item.isActive === true)
-    let previousBid = { count: undefined, value: undefined }
-    if (currentPlayer !== undefined)
-      previousBid = previousPlayer(currentPlayer).bid
-    return previousBid
+  const previousBid = (player) => {
+    // const currentPlayer = activePlayers.find((item) => item.isActive === true)
+    // let previousBid = { count: undefined, value: undefined }
+    // if (currentPlayer !== undefined)
+    //   previousBid = previousPlayer(currentPlayer).bid
+    // return previousBid
+    return previousPlayer(player).bid
   }
 
   const checkBidProposal = (player) => {
@@ -105,51 +106,52 @@ export default function useBidData() {
       return false
     }
 
-    if (isNaN(currentBid().count) || isNaN(currentBid().value)) return true
+    if (isNaN(previousBid(player).count) || isNaN(previousBid(player).value))
+      return true
 
     if (
-      currentBid().value !== 1 &&
+      previousBid(player).value !== 1 &&
       player.bid.value !== 1 &&
-      player.bid.count === currentBid().count &&
-      player.bid.value > currentBid().value &&
+      player.bid.count === previousBid(player).count &&
+      player.bid.value > previousBid(player).value &&
       !game.isPalifico
     )
       return true
 
     if (
-      currentBid().value !== 1 &&
+      previousBid(player).value !== 1 &&
       player.bid.value !== 1 &&
-      player.bid.count > currentBid().count &&
-      player.bid.value === currentBid().value
+      player.bid.count > previousBid(player).count &&
+      player.bid.value === previousBid(player).value
     )
       return true
 
     if (
-      currentBid().value !== 1 &&
+      previousBid(player).value !== 1 &&
       player.bid.value === 1 &&
-      player.bid.count >= Math.ceil(currentBid().count / 2) &&
+      player.bid.count >= Math.ceil(previousBid(player).count / 2) &&
       !game.isPalifico
     )
       return true
 
     if (
-      currentBid().value === 1 &&
+      previousBid(player).value === 1 &&
       player.bid.value !== 1 &&
-      player.bid.count > currentBid().count * 2 &&
+      player.bid.count > previousBid(player).count * 2 &&
       !game.isPalifico
     )
       return true
 
     if (
-      currentBid().value === 1 &&
+      previousBid(player).value === 1 &&
       player.bid.value === 1 &&
-      player.bid.count > currentBid().count
+      player.bid.count > previousBid(player).count
     )
       return true
 
     if (
-      player.bid.count === currentBid().count &&
-      player.bid.value === currentBid().value
+      player.bid.count === previousBid(player).count &&
+      player.bid.value === previousBid(player).value
     )
       dispatch(
         displayErrorMessage({
@@ -157,7 +159,7 @@ export default function useBidData() {
           body: "L'enchère ne peut être la même que la précédente.",
         })
       )
-    else if (game.isPalifico && player.bid.value !== currentBid().value)
+    else if (game.isPalifico && player.bid.value !== previousBid(player).value)
       dispatch(
         displayErrorMessage({
           title: 'Votre enchère est invalide.',
@@ -165,9 +167,9 @@ export default function useBidData() {
         })
       )
     else if (
-      currentBid().value !== 1 &&
+      previousBid(player).value !== 1 &&
       player.bid.value === 1 &&
-      player.bid.count < Math.ceil(currentBid().count / 2)
+      player.bid.count < Math.ceil(previousBid(player).count / 2)
     )
       dispatch(
         displayErrorMessage({
@@ -176,9 +178,9 @@ export default function useBidData() {
         })
       )
     else if (
-      currentBid().value === 1 &&
+      previousBid(player).value === 1 &&
       player.bid.value !== 1 &&
-      player.bid.count <= currentBid().count * 2
+      player.bid.count <= previousBid(player).count * 2
     )
       dispatch(
         displayErrorMessage({
@@ -186,14 +188,14 @@ export default function useBidData() {
           body: "Si l'enchère précédente porte sur des Paco le nombre de dés doit être au moins égale au double plus 1.",
         })
       )
-    else if (player.bid.value < currentBid().value)
+    else if (player.bid.value < previousBid(player).value)
       dispatch(
         displayErrorMessage({
           title: 'Votre enchère est invalide.',
           body: "La valeur du dé ne peut être inférieure à celle de l'enchère précédente.",
         })
       )
-    else if (player.bid.count < currentBid().count)
+    else if (player.bid.count < previousBid(player).count)
       dispatch(
         displayErrorMessage({
           title: 'Votre enchère est invalide.',
@@ -201,8 +203,8 @@ export default function useBidData() {
         })
       )
     else if (
-      player.bid.count !== currentBid().count &&
-      player.bid.value !== currentBid().value
+      player.bid.count !== previousBid(player).count &&
+      player.bid.value !== previousBid(player).value
     )
       dispatch(
         displayErrorMessage({
@@ -243,7 +245,7 @@ export default function useBidData() {
     decreaseBidValue: decreaseBidValue,
     setBidCount: setBidCount,
     setBidValue: setBidValue,
-    currentBid: currentBid,
+    previousBid: previousBid,
     checkBidProposal: checkBidProposal,
     checkBid: checkBid,
   }
