@@ -49,7 +49,7 @@ export default function ActionBar(props) {
       currentPlayer.isComputer &&
         setTimeout(() => {
           setPlay(computerPlay(currentPlayer))
-        }, 1000)
+        }, 1000 + Math.random()*2000)
     }
   }, [currentPlayer.hasToPlay])
 

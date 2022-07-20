@@ -6,6 +6,7 @@ import ErrorMessage from './Layouts/ErrorMessage'
 import { updateIsPause } from './redux/store'
 import { useEffect } from 'react'
 import useGameData from './hooks/useGameData'
+import GameMenu from './Layouts/GameMenu'
 
 function App() {
   const { game } = useGameData()
@@ -19,6 +20,7 @@ function App() {
     <>
       <div className="app">
         {game.errorMessage.isDisplayed && <ErrorMessage />}
+        {game.gameMenu.isDisplayed && <GameMenu />}
         <GameTable />
         <Footer />
       </div>

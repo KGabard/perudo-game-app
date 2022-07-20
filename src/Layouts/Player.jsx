@@ -21,7 +21,7 @@ export default function Player(props) {
           <div className="player__header">
             <img
               src={currentPlayer.avatar}
-              alt="Logo du joueur"
+              alt="Avatar du joueur"
               className="player__header__avatar"
             />
             <h1 className="player__header__name">{currentPlayer.name}</h1>

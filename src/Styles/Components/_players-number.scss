@@ -1,0 +1,43 @@
+.playersNumber {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 16px;
+  &__label {
+    @include typographies(subtitle);
+  }
+  &__numberContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+  }
+  &__number {
+    width: 56px;
+    height: 56px;
+    border: 3px solid $basic-white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: span 2;
+    @include typographies(title);
+  }
+  &__upArrow {
+    @include arrow-btn($arrow, $arrow-neutral);
+    transform: rotate(0deg);
+    left: 2px;
+    bottom: -28px;
+  }
+  &__downArrow {
+    @include arrow-btn($arrow, $arrow-neutral);
+    transform: rotate(180deg);
+    right: 2px;
+    bottom: -28px;
+  }
+}

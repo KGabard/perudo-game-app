@@ -22,13 +22,6 @@ export default function useResetPlayers() {
     resetPlayerDiceChanges(player)
     setBidCount(player, undefined)
     setBidValue(player, undefined)
-    // if (player.diceCount <= 0) {
-    //   eliminatePlayer(player)
-    //   if (activePlayers.length > 2)
-    //     dispatch(
-    //       updateHasToPlay({ player: nextPlayer(player), hasToPlay: true })
-    //     )
-    // }
     if (player.diceCount <= 0) {
       dispatch(eliminatePlayer(player))
       if (activePlayers.length > 2)

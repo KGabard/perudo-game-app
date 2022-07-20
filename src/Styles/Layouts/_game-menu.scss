@@ -1,0 +1,38 @@
+.gameMenu {
+    position: absolute;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    &__overlay {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      background-color: $neutral-primary;
+      opacity: 0.5;
+    }
+    &__window {
+      @include message-window;
+      height: fit-content;
+      margin: 96px 0 64px;
+      width: fit-content;
+      position: relative;
+    }
+    &__header {
+      width: 100%;
+      text-align: center;
+      @include typographies(header);
+      margin-bottom: 16px;
+    }
+    &__okBtn {
+      align-self: end;
+      margin-top: 16px;
+      @include button($ok-button-width, $ok-button-height, $neutral-secondary);
+    }
+  }
+  

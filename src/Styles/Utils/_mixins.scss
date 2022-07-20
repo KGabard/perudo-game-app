@@ -2,7 +2,11 @@
 //     text-shadow: $offset $offset $colour;
 // }
 
-@mixin button($width: $button-width, $height: $button-height, $color: $highlight-secondary) {
+@mixin button(
+  $width: $button-width,
+  $height: $button-height,
+  $color: $highlight-secondary
+) {
   width: $width;
   height: $height;
   display: flex;
@@ -39,6 +43,17 @@
   background-color: $primary-color;
   border: 3px solid $secondary-color;
   border-radius: 32px;
+}
+
+@mixin arrow-btn($arrow: $arrow, $hoveredArrow: $arrow-highlight) {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  content: $arrow;
+  cursor: pointer;
+  &:hover {
+    content: $hoveredArrow;
+  }
 }
 
 @mixin tablet-and-mobile {

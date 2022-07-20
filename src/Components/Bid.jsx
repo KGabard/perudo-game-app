@@ -1,10 +1,8 @@
 import Dice from './Dice'
-import arrowBtn from '../Assets/Images/white-arrow.png'
-import arrowBtnHover from '../Assets/Images/blue-arrow.png'
 import { v4 as uuidv4 } from 'uuid'
 import useBidData from '../hooks/useBidData'
 import useGameData from '../hooks/useGameData'
-import useArrowBtns from '../hooks/useArrowBtns'
+import arrowIcon from '../Assets/Images/arrow.svg'
 
 export default function Bid(props) {
   const currentPlayer = props.playerData
@@ -15,9 +13,6 @@ export default function Bid(props) {
     increaseBidValue,
     decreaseBidValue,
   } = useBidData()
-
-  const { areArrowBtnsHovered, toggleHoverTrue, toggleHoverFalse } =
-    useArrowBtns()
 
   const isHumanPlaying = currentPlayer.isComputer
     ? false
@@ -47,22 +42,18 @@ export default function Bid(props) {
         </div>
         {isHumanPlaying && (
           <img
-            onMouseOver={() => toggleHoverTrue('countLeft')}
-            onMouseOut={() => toggleHoverFalse()}
-            onClick={() => decreaseBidCount(currentPlayer)}
-            src={areArrowBtnsHovered.countLeft ? arrowBtnHover : arrowBtn}
+            src={arrowIcon}
+            alt='flèche'
             className="bid__countLeftArrow"
-            alt="Flèche gauche"
+            onClick={() => decreaseBidCount(currentPlayer)}
           ></img>
         )}
         {isHumanPlaying && (
           <img
-            onMouseOver={() => toggleHoverTrue('countRight')}
-            onMouseOut={() => toggleHoverFalse()}
-            onClick={() => increaseBidCount(currentPlayer)}
-            src={areArrowBtnsHovered.countRight ? arrowBtnHover : arrowBtn}
+          src={arrowIcon}
+          alt='flèche'
             className="bid__countRightArrow"
-            alt="Flèche droite"
+            onClick={() => increaseBidCount(currentPlayer)}
           ></img>
         )}
       </div>
@@ -75,22 +66,18 @@ export default function Bid(props) {
         />
         {isHumanPlaying && (
           <img
-            onMouseOver={() => toggleHoverTrue('diceLeft')}
-            onMouseOut={() => toggleHoverFalse()}
-            onClick={() => decreaseBidValue(currentPlayer)}
-            src={areArrowBtnsHovered.diceLeft ? arrowBtnHover : arrowBtn}
+          src={arrowIcon}
+          alt='flèche'
             className="bid__diceLeftArrow"
-            alt="Flèche gauche"
+            onClick={() => decreaseBidValue(currentPlayer)}
           ></img>
         )}
         {isHumanPlaying && (
           <img
-            onMouseOver={() => toggleHoverTrue('diceRight')}
-            onMouseOut={() => toggleHoverFalse()}
-            onClick={() => increaseBidValue(currentPlayer)}
-            src={areArrowBtnsHovered.diceRight ? arrowBtnHover : arrowBtn}
+          src={arrowIcon}
+          alt='flèche'
             className="bid__diceRightArrow"
-            alt="Flèche droite"
+            onClick={() => increaseBidValue(currentPlayer)}
           ></img>
         )}
       </div>

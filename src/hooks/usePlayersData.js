@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  // updateActivePlayers,
-  // updateEliminatedPlayers,
   updateIsActive,
 } from '../redux/store'
 
@@ -60,16 +58,6 @@ export default function usePlayersData() {
     })
   }
 
-  // const eliminatePlayer = (player) => {
-  //   const newActivePlayers = activePlayers.filter(
-  //     (item) => item.id !== player.id
-  //   )
-  //   const newEliminatedPlayers = eliminatedPlayers.map((item) => item)
-  //   newEliminatedPlayers.unshift(player)
-  //   dispatch(updateActivePlayers(newActivePlayers))
-  //   dispatch(updateEliminatedPlayers(newEliminatedPlayers))
-  // }
-
   return {
     activePlayers: activePlayers,
     eliminatedPlayers: eliminatedPlayers,
@@ -80,6 +68,5 @@ export default function usePlayersData() {
     nextPlayer: nextPlayer,
     desactivateAllPlayers: desactivateAllPlayers,
     activatePlayer: activatePlayer,
-    // eliminatePlayer: eliminatePlayer,
   }
 }

@@ -2,6 +2,27 @@
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  &.diceFace1 {
+    content: $dice-face-1;
+  }
+  &.diceFace2 {
+    content: $dice-face-2;
+  }
+  &.diceFace3 {
+    content: $dice-face-3;
+  }
+  &.diceFace4 {
+    content: $dice-face-4;
+  }
+  &.diceFace5 {
+    content: $dice-face-5;
+  }
+  &.diceFace6 {
+    content: $dice-face-6;
+  }
+  &.diceFaceEmpty {
+    content: $dice-face-empty;
+  }
   &.disabled {
     opacity: 0.5;
   }

@@ -78,11 +78,6 @@ export default function useBidData() {
   }
 
   const previousBid = (player) => {
-    // const currentPlayer = activePlayers.find((item) => item.isActive === true)
-    // let previousBid = { count: undefined, value: undefined }
-    // if (currentPlayer !== undefined)
-    //   previousBid = previousPlayer(currentPlayer).bid
-    // return previousBid
     return previousPlayer(player).bid
   }
 
@@ -222,8 +217,6 @@ export default function useBidData() {
   const checkBid = (bid, type) => {
     let isBidValid
     const diceCount = countDice(bid.value)
-    // showPlayersDices()
-    //! Transférer showPlayersDices() en dehors de checkBid
     switch (type) {
       case 'dudo':
         isBidValid = bid.count <= diceCount
