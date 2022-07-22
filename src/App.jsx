@@ -7,6 +7,9 @@ import { updateIsPause } from './redux/store'
 import { useEffect } from 'react'
 import useGameData from './hooks/useGameData'
 import GameMenu from './Layouts/GameMenu'
+import ControlsMenu from './Layouts/ControlsMenu'
+import RulesMenu from './Layouts/RulesMenu'
+import SettingsMenu from './Layouts/SettingsMenu'
 
 function App() {
   const { game } = useGameData()
@@ -21,6 +24,9 @@ function App() {
       <div className="app">
         {game.errorMessage.isDisplayed && <ErrorMessage />}
         {game.gameMenu.isDisplayed && <GameMenu />}
+        {game.controlsMenu.isDisplayed && <ControlsMenu />}
+        {game.rulesMenu.isDisplayed && <RulesMenu />}
+        {game.settingsMenu.isDisplayed && <SettingsMenu />}
         <GameTable />
         <Footer />
       </div>

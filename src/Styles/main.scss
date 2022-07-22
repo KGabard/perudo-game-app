@@ -12,6 +12,7 @@
 @import "./Components/action-bar.scss";
 @import "./Components/players-number.scss";
 @import "./Components/player-form.scss";
+@import "./Components/control.scss";
 
 @import "./Layouts/header.scss";
 @import "./Layouts/footer.scss";
@@ -20,5 +21,8 @@
 @import "./Layouts/players.scss";
 @import "./Layouts/game-table.scss";
 @import "./Layouts/error-message.scss";
-@import "./Layouts/game-menu.scss";
 @import "./Layouts/end-turn-message.scss";
+@import "./Layouts/game-menu.scss";
+@import "./Layouts/controls-menu.scss";
+@import "./Layouts/rules-menu.scss";
+@import "./Layouts/settings-menu.scss";

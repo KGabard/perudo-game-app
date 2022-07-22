@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 import PlayerForm from '../Components/PlayerForm'
 import PlayersNumber from '../Components/PlayersNumber'
 import useGameData from '../hooks/useGameData'
-import { hideGameMenu, setNewPlayers, updateIsOver } from '../redux/store'
+import { hideMenu, setNewPlayers, updateIsOver } from '../redux/store'
 import { v4 as uuidv4 } from 'uuid'
 import usePlayersData from '../hooks/usePlayersData'
 import useResetPlayers from '../hooks/useResetPlayers'
@@ -27,18 +27,18 @@ export default function GameMenu() {
       activePlayers.forEach((item) => {
         resetPlayer(item)
       })
-      closeGameMenu()
+      closeMenu()
       // setGameHasToStart(false)
     }
   }, [gameHasToStart])
 
-  const closeGameMenu = () => {
-    dispatch(hideGameMenu())
+  const closeMenu = () => {
+    dispatch(hideMenu('game'))
   }
 
   return (
     <div className="gameMenu">
-      <div onClick={closeGameMenu} className="gameMenu__overlay"></div>
+      <div onClick={closeMenu} className="gameMenu__overlay"></div>
       <div className="gameMenu__window">
         <h1 className="gameMenu__header">Nouvelle Partie !</h1>
         <PlayersNumber />

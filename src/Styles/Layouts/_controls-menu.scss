@@ -1,0 +1,8 @@
+.controlsMenu {
+  @include menu;
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

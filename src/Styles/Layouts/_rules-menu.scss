@@ -1,0 +1,35 @@
+.rulesMenu {
+    @include menu;
+    &__window {
+        width: 640px;
+        gap: 0px;
+    }
+    &__title {
+        margin-top: 16px;
+        @include typographies(title);
+    }
+    &__subtitle {
+        margin-top: 16px;
+        @include typographies(subtitle);
+    }
+    &__body {
+        margin-top: 8px;
+        @include typographies(body);
+        white-space: pre-wrap;
+        text-align: justify;
+        list-style: disc inside none;
+    }
+    &__paragraph {
+        margin-top: 4px;
+    }
+    &__list {
+        margin-top: 8px;
+        @include typographies(body);
+        text-align: justify;
+        margin-left: 24px;
+        & li {
+            margin-top: 4px;
+        }
+    }
+  }
+  

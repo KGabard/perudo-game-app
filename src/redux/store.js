@@ -18,6 +18,8 @@ const playerImages = [
   playerImage6,
 ]
 
+//! Séparer les slices dans plusieurs fichiers différents et le store également
+
 const playersSlice = createSlice({
   name: 'players',
   initialState: {
@@ -243,7 +245,7 @@ const gameSlice = createSlice({
       isExpanded: false,
     },
     gameMenu: {
-      isDisplayed: true,
+      isDisplayed: false,
       players: [
         {
           name: '',
@@ -256,6 +258,15 @@ const gameSlice = createSlice({
           isComputer: false,
         },
       ],
+    },
+    controlsMenu: {
+      isDisplayed: false,
+    },
+    rulesMenu: {
+      isDisplayed: false,
+    },
+    settingsMenu: {
+      isDisplayed: false,
     },
     maxDicesPerPlayer: 5,
     maxPlayersNumber: 5,
@@ -286,9 +297,6 @@ const gameSlice = createSlice({
     },
     hideErrorMessage: (state) => {
       state.errorMessage.isDisplayed = false
-    },
-    hideGameMenu: (state) => {
-      state.gameMenu.isDisplayed = false
     },
     displayEndTurnMessage: (state, action) => {
       const message = action.payload
@@ -329,12 +337,43 @@ const gameSlice = createSlice({
       )
       player.name = action.payload.name
     },
-    updateActiveMenu: (state, action) => {
+    hideMenu: (state, action) => {
+      switch (action.payload) {
+        case 'game':
+          state.gameMenu.isDisplayed = false
+          break
+        case 'controls':
+          state.controlsMenu.isDisplayed = false
+          break
+        case 'rules':
+          state.rulesMenu.isDisplayed = false
+          break
+        case 'settings':
+          state.settingsMenu.isDisplayed = false
+          break
+
+        default:
+          break
+      }
+    },
+    activateMenu: (state, action) => {
       state.gameMenu.isDisplayed = false
+      state.controlsMenu.isDisplayed = false
+      state.rulesMenu.isDisplayed = false
+      state.settingsMenu.isDisplayed = false
 
       switch (action.payload) {
         case 'game':
           state.gameMenu.isDisplayed = true
+          break
+        case 'controls':
+          state.controlsMenu.isDisplayed = true
+          break
+        case 'rules':
+          state.rulesMenu.isDisplayed = true
+          break
+        case 'settings':
+          state.settingsMenu.isDisplayed = true
           break
 
         default:
@@ -351,14 +390,14 @@ export const {
   incrementTurnCounter,
   displayErrorMessage,
   hideErrorMessage,
-  hideGameMenu,
+  hideMenu,
   displayEndTurnMessage,
   hideEndTurnMessage,
   expandEndTurnMessage,
   toggleIsComputer,
   updatePlayerAvatar,
   updatePlayers,
-  updateActiveMenu,
+  activateMenu,
   updatePlayerName,
 } = gameSlice.actions
 

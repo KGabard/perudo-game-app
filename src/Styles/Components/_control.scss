@@ -1,0 +1,11 @@
+.control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    &__key {
+        height: 56px;
+    }
+    &__label {
+        @include typographies(subtitle)
+    }
+}

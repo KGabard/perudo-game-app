@@ -1,37 +1,52 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import useGameData from '../hooks/useGameData'
-import { updateActiveMenu } from '../redux/store'
+import { activateMenu } from '../redux/store'
 
 export default function Navbar() {
   const { game } = useGameData()
   const dispatch = useDispatch()
 
   return (
-    <ul className={game.gameMenu.isDisplayed ? 'navbar active' : 'navbar'}>
+    <ul
+      className={
+        game.gameMenu.isDisplayed ||
+        game.controlsMenu.isDisplayed ||
+        game.rulesMenu.isDisplayed ||
+        game.settingsMenu.isDisplayed
+          ? 'navbar active'
+          : 'navbar'
+      }
+    >
       <li
         className={
           game.gameMenu.isDisplayed ? 'navbar__item active' : 'navbar__item'
         }
-        onClick={() => dispatch(updateActiveMenu('game'))}
+        onClick={() => dispatch(activateMenu('game'))}
       >
         Partie
       </li>
       <li
-        className="navbar__item"
-        onClick={() => dispatch(updateActiveMenu('controls'))}
+        className={
+          game.controlsMenu.isDisplayed ? 'navbar__item active' : 'navbar__item'
+        }
+        onClick={() => dispatch(activateMenu('controls'))}
       >
         Commande
       </li>
       <li
-        className="navbar__item"
-        onClick={() => dispatch(updateActiveMenu('rules'))}
+        className={
+          game.rulesMenu.isDisplayed ? 'navbar__item active' : 'navbar__item'
+        }
+        onClick={() => dispatch(activateMenu('rules'))}
       >
         Règles
       </li>
       <li
-        className="navbar__item"
-        onClick={() => dispatch(updateActiveMenu('settings'))}
+        className={
+          game.settingsMenu.isDisplayed ? 'navbar__item active' : 'navbar__item'
+        }
+        onClick={() => dispatch(activateMenu('settings'))}
       >
         Options
       </li>
