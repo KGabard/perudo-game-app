@@ -1,70 +1,69 @@
-import useGameData from '../hooks/useGameData'
-import { useDispatch } from 'react-redux'
 import arrowIcon from '../Assets/Images/arrow.svg'
-import { toggleIsComputer, updatePlayerName } from '../redux/store'
 import emptyAvatar from '../Assets/Images/PlayerImageEmpty.png'
-import { useEffect, useState } from 'react'
+import useGameData from '../hooks/useGameData'
 
-export default function PlayerForm(props) {
-  const currentIndex = props.playerIndex
-  const { game, setAvatar } = useGameData()
-  const dispatch = useDispatch()
+export default function PlayerForm({
+  currentPlayer,
+  currentIndex,
+  handleNameChange,
+  handleAvatarChange,
+  toggleIsComputer,
+}) {
+  // const currentIndex = props.playerIndex
+  // const { game, setAvatar } = useGameData()
+  // const dispatch = useDispatch()
 
-  const currentPlayer = game.gameMenu.players[currentIndex]
+  // const currentPlayer = game.gameMenu.players[currentIndex]
 
-  const [nameIsValid, setNameIsValid] = useState(true)
-  const [currentName, setCurrentName] = useState('')
+  // const currentPlayer = player
+  // const currentIndex = index
 
-  const checkName = (name) => {
-    let nameIsValid = false
-    if (name.length >= 2 && name.length <= 10) nameIsValid = true
-    setNameIsValid(nameIsValid)
-    setCurrentName(name)
-  }
+  // const [nameIsValid, setNameIsValid] = useState(true)
+  // const [currentName, setCurrentName] = useState('')
 
-  useEffect(() => {
-    setCurrentName(currentPlayer.name)
-  }, [currentPlayer.name])
+  // const checkName = (name) => {
+  //   let nameIsValid = false
+  //   if (name.length >= 2 && name.length <= 10) nameIsValid = true
+  //   setNameIsValid(nameIsValid)
+  //   setCurrentName(currentIndex, name)
+  // }
+
+  // useEffect(() => {
+  //   setCurrentName(currentPlayer.name)
+  // }, [currentPlayer.name])
+  const { game } = useGameData()
 
   return (
     <div className="playerForm">
       <p className="playerForm__label">Joueur n°{currentIndex + 1}</p>
       <input
         type="text"
-        className={
-          nameIsValid ? 'playerForm__input' : 'playerForm__input wrong'
-        }
+        className={'playerForm__input'}
+        name="name"
+        // className={
+        //   nameIsValid ? 'playerForm__input' : 'playerForm__input wrong'
+        // }
         placeholder="Nom du joueur..."
         title="Le nom doit comporter entre 2 et 10 caractères."
-        onChange={(e) => checkName(e.target.value)}
-        onBlur={(e) =>
-          dispatch(
-            updatePlayerName({
-              index: currentIndex,
-              name: currentName,
-            })
-          )
-        }
-        value={currentName}
+        // onChange={(e) => setCurrentName(e.target.value)}
+        onChange={(e) => handleNameChange(e, currentIndex)}
+        // onBlur={() => setName(currentIndex, currentName)}
+        value={currentPlayer.name}
       />
       <div className="playerForm__avatarContainer">
         <img
-          src={currentPlayer.avatar ? currentPlayer.avatar : emptyAvatar}
+          src={game.playerImages[currentPlayer.avatar]}
           alt="Avatar du joueur"
-          className={
-            currentPlayer.avatar
-              ? 'playerForm__avatar'
-              : 'playerForm__avatar wrong'
-          }
+          className={'playerForm__avatar'}
         ></img>
         <img
-          onClick={() => setAvatar(currentIndex, 'previous')}
+          onClick={() => handleAvatarChange(currentIndex, 'previous')}
           src={arrowIcon}
           className="playerForm__upArrow"
           alt="Flèche haut"
         ></img>
         <img
-          onClick={() => setAvatar(currentIndex, 'next')}
+          onClick={() => handleAvatarChange(currentIndex, 'next')}
           src={arrowIcon}
           className="playerForm__downArrow"
           alt="Flèche bas"
@@ -72,16 +71,15 @@ export default function PlayerForm(props) {
       </div>
       <div className="playerForm__computerContainer">
         <p className="playerForm__computerLabel">Ordinateur ?</p>
-        <div
-          className={
-            currentPlayer.isComputer
-              ? 'playerForm__computerCheckBox checked'
-              : 'playerForm__computerCheckBox'
-          }
-          onClick={() => {
-            dispatch(toggleIsComputer(currentIndex))
+        <input
+          type="checkbox"
+          className={'playerForm__computerCheckBox'}
+          onClick={(e) => {
+            toggleIsComputer(e, currentIndex)
           }}
-        ></div>
+          value={currentPlayer.isComputer}
+          name="isComputer"
+        />
       </div>
     </div>
   )

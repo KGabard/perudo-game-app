@@ -23,6 +23,13 @@ export default function useActionBar({ player, panelRef, play, setPlay }) {
 
   const dispatch = useDispatch()
 
+  const computeTime = () => {
+    const time =
+      (8000 + Math.random() * 8000) *
+      Math.pow(0.7, Math.pow(game.computerSpeed.speed, 1.6))
+    return time
+  }
+
   useEffect(() => {
     if (!play.isPlaying || game.isPause) return
     switch (play.payload) {
@@ -49,7 +56,7 @@ export default function useActionBar({ player, panelRef, play, setPlay }) {
       player.isComputer &&
         setTimeout(() => {
           setPlay(computerPlay(player))
-        }, 1000 + Math.random() * 2000)
+        }, computeTime())
     }
   }, [player.hasToPlay])
 

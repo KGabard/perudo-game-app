@@ -2,9 +2,11 @@ import React, { useRef } from 'react'
 import Dices from '../Components/Dices'
 import Bid from '../Components/Bid'
 import ActionBar from '../Components/ActionBar'
+import useGameData from '../hooks/useGameData'
 
 export default function Player(props) {
   const currentPlayer = props.playerData
+  const {game} = useGameData()
 
   const ref = useRef()
 
@@ -20,7 +22,7 @@ export default function Player(props) {
         <div className="player__grid">
           <div className="player__header">
             <img
-              src={currentPlayer.avatar}
+              src={game.playerImages[currentPlayer.avatar]}
               alt="Avatar du joueur"
               className="player__header__avatar"
             />

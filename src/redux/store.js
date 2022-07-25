@@ -9,97 +9,15 @@ import playerImage4 from '../Assets/Images/PlayerImage4.png'
 import playerImage5 from '../Assets/Images/PlayerImage5.png'
 import playerImage6 from '../Assets/Images/PlayerImage6.png'
 
-const playerImages = [
-  playerImage1,
-  playerImage2,
-  playerImage3,
-  playerImage4,
-  playerImage5,
-  playerImage6,
-]
+import hangdrumMusic from '../Assets/Musics/hangdrum.wav'
+import panfluteMusic from '../Assets/Musics/panflute.wav'
 
 //! Séparer les slices dans plusieurs fichiers différents et le store également
 
 const playersSlice = createSlice({
   name: 'players',
   initialState: {
-    activePlayers: [
-      // {
-      //   id: uuidv4(),
-      //   name: 'Kevin',
-      //   avatar: playerImage1,
-      //   diceCount: 5,
-      //   dices: [],
-      //   diceChanges: [],
-      //   isComputer: false,
-      //   isActive: false,
-      //   areDicesDisplayed: false,
-      //   bid: { count: undefined, value: undefined },
-      //   hasToPlay: true,
-      //   isWrong: false,
-      //   isRight: false,
-      // },
-      // {
-      //   id: uuidv4(),
-      //   name: 'Maman',
-      //   avatar: playerImage2,
-      //   diceCount: 5,
-      //   dices: [],
-      //   diceChanges: [],
-      //   isComputer: false,
-      //   isActive: false,
-      //   areDicesDisplayed: false,
-      //   bid: { count: undefined, value: undefined },
-      //   hasToPlay: false,
-      //   isWrong: false,
-      //   isRight: false,
-      // },
-      // {
-      //   id: uuidv4(),
-      //   name: 'Papa',
-      //   avatar: playerImage3,
-      //   diceCount: 5,
-      //   dices: [],
-      //   diceChanges: [],
-      //   isComputer: true,
-      //   isActive: false,
-      //   areDicesDisplayed: false,
-      //   bid: { count: undefined, value: undefined },
-      //   hasToPlay: false,
-      //   isWrong: false,
-      //   isRight: false,
-      // },
-      // {
-      //   id: uuidv4(),
-      //   name: 'Cecile',
-      //   avatar: playerImage4,
-      //   diceCount: 5,
-      //   dices: [],
-      //   diceChanges: [],
-      //   isComputer: true,
-      //   isActive: false,
-      //   areDicesDisplayed: false,
-      //   bid: { count: undefined, value: undefined },
-      //   hasToPlay: false,
-      //   isWrong: false,
-      //   isRight: false,
-      // },
-      // {
-      //   id: uuidv4(),
-      //   name: 'Anaïs',
-      //   avatar: playerImage5,
-      //   diceCount: 5,
-      //   dices: [],
-      //   diceChanges: [],
-      //   isComputer: true,
-      //   isActive: false,
-      //   areDicesDisplayed: false,
-      //   bid: { count: undefined, value: undefined },
-      //   hasToPlay: false,
-      //   isWrong: false,
-      //   isRight: false,
-      // },
-    ],
+    activePlayers: [],
     eliminatedPlayers: [],
   },
   reducers: {
@@ -244,20 +162,16 @@ const gameSlice = createSlice({
       body: 'Expanded body',
       isExpanded: false,
     },
+    playerImages: [
+      playerImage1,
+      playerImage2,
+      playerImage3,
+      playerImage4,
+      playerImage5,
+      playerImage6,
+    ],
     gameMenu: {
       isDisplayed: false,
-      players: [
-        {
-          name: '',
-          avatar: playerImages[0],
-          isComputer: false,
-        },
-        {
-          name: '',
-          avatar: playerImages[1],
-          isComputer: false,
-        },
-      ],
     },
     controlsMenu: {
       isDisplayed: false,
@@ -273,6 +187,19 @@ const gameSlice = createSlice({
     minPlayersNumber: 2,
     turnCounter: 1,
     computerBluff: true,
+    computerSpeed: {
+      speed: 3,
+      min: 1,
+      max: 5,
+    },
+    music: {
+      list: [
+        { name: 'hangdrum', url: hangdrumMusic },
+        { name: 'panflute', url: panfluteMusic },
+      ],
+      current: 0,
+      isPlaying: false,
+    },
   },
   reducers: {
     updateIsPause: (state) => {
@@ -314,28 +241,6 @@ const gameSlice = createSlice({
     },
     expandEndTurnMessage: (state) => {
       state.endTurnMessage.isExpanded = true
-    },
-    updatePlayers: (state, action) => {
-      state.gameMenu.players = action.payload
-      return state
-    },
-    toggleIsComputer: (state, action) => {
-      const player = state.gameMenu.players.find(
-        (item, index) => index === action.payload
-      )
-      player.isComputer = !player.isComputer
-    },
-    updatePlayerAvatar: (state, action) => {
-      const player = state.gameMenu.players.find(
-        (item, index) => index === action.payload.index
-      )
-      player.avatar = action.payload.avatar
-    },
-    updatePlayerName: (state, action) => {
-      const player = state.gameMenu.players.find(
-        (item, index) => index === action.payload.index
-      )
-      player.name = action.payload.name
     },
     hideMenu: (state, action) => {
       switch (action.payload) {
@@ -380,6 +285,29 @@ const gameSlice = createSlice({
           break
       }
     },
+    increaseComputerSpeed: (state, action) => {
+      if (state.computerSpeed.speed < state.computerSpeed.max)
+        state.computerSpeed.speed = state.computerSpeed.speed + 1
+    },
+    decreaseComputerSpeed: (state) => {
+      if (state.computerSpeed.speed > state.computerSpeed.min)
+        state.computerSpeed.speed = state.computerSpeed.speed - 1
+    },
+    toggleComputerBluff: (state) => {
+      state.computerBluff = !state.computerBluff
+    },
+    toggleIsMusicPlaying: (state) => {
+      state.music.isPlaying = !state.music.isPlaying
+    },
+    nextMusic: (state) => {
+      if (state.music.current < state.music.list.length - 1)
+        state.music.current = state.music.current + 1
+      else state.music.current = 0
+    },
+    previousMusic: (state) => {
+      if (state.music.current > 0) state.music.current = state.music.current - 1
+      else state.music.current = state.music.list.length - 1
+    },
   },
 })
 
@@ -394,11 +322,13 @@ export const {
   displayEndTurnMessage,
   hideEndTurnMessage,
   expandEndTurnMessage,
-  toggleIsComputer,
-  updatePlayerAvatar,
-  updatePlayers,
   activateMenu,
-  updatePlayerName,
+  increaseComputerSpeed,
+  decreaseComputerSpeed,
+  toggleComputerBluff,
+  toggleIsMusicPlaying,
+  nextMusic,
+  previousMusic,
 } = gameSlice.actions
 
 export const store = configureStore({

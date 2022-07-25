@@ -1,0 +1,11 @@
+.computerBluff {
+  @include menu-component;
+  &__bluff {
+    @include typographies(title);
+    cursor: pointer;
+    margin-right: 32px;
+    &:hover {
+      color: $neutral-secondary;
+    }
+  }
+}

@@ -1,16 +1,21 @@
-import useGameData from '../hooks/useGameData'
 import arrowIcon from '../Assets/Images/arrow.svg'
 
-export default function PlayersNumber() {
-  const { game, increasePlayersNumber, decreasePlayersNumber } = useGameData()
-
+export default function PlayersNumber({
+  playersNumber,
+  increasePlayersNumber,
+  decreasePlayersNumber,
+}) {
   return (
     <div className="playersNumber">
       <p className="playersNumber__label">Nombre de joueurs ?</p>
       <div className="playersNumber__numberContainer">
-        <div className="playersNumber__number">
-          {game.gameMenu.players.length}
-        </div>
+        <input
+          type="number"
+          value={playersNumber}
+          onChange={() => {}}
+          name="playersNumber"
+          className="playersNumber__number"
+        />
         <img
           onClick={() => increasePlayersNumber()}
           src={arrowIcon}

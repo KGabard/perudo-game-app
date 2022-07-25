@@ -69,15 +69,10 @@
     @include typographies(body-italic);
   }
   &__computerCheckBox {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 2px;
-    background-color: $basic-white;
     cursor: pointer;
-    color: $neutral-primary;
-    &.checked {
-      background-color: $neutral-secondary;
-      border: 2px solid $basic-white;
-    }
+    accent-color: $neutral-secondary;
   }
 }

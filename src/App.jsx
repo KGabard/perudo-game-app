@@ -10,6 +10,7 @@ import GameMenu from './Layouts/GameMenu'
 import ControlsMenu from './Layouts/ControlsMenu'
 import RulesMenu from './Layouts/RulesMenu'
 import SettingsMenu from './Layouts/SettingsMenu'
+import useMusic from './hooks/useMusic'
 
 function App() {
   const { game } = useGameData()
@@ -18,6 +19,8 @@ function App() {
   useEffect(() => {
     dispatch(updateIsPause())
   }, [dispatch, game.errorMessage.isDisplayed, game.endTurnMessage.isDisplayed])
+
+  useMusic()
 
   return (
     <>
