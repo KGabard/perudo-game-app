@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { hideEndTurnMessage, hideMenu, setNewPlayers, updateIsOver } from '../redux/store'
+import {
+  hideEndTurnMessage,
+  hideMenu,
+  resetEliminatedPlayers,
+  setNewPlayers,
+  updateIsOver,
+} from '../redux/store'
 import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 import useResetPlayers from './useResetPlayers'
 
-export default function useGameMenu({formData, setFormData}) {
+export default function useGameMenu({ watch, setValue, append, remove }) {
   const dispatch = useDispatch()
   const { game } = useGameData()
   const { activePlayers } = usePlayersData()
   const { resetPlayer } = useResetPlayers()
 
   const [gameHasToStart, setGameHasToStart] = useState(false)
+
+  const players = watch('players')
 
   const otherAvatar = (avatarIndex, type) => {
     switch (type) {
@@ -35,7 +43,7 @@ export default function useGameMenu({formData, setFormData}) {
 
   const isAvatarAvailable = (avatar) => {
     let isAvailable = true
-    formData.players.forEach((item) => {
+    players.forEach((item) => {
       if (avatar === item.avatar) isAvailable = false
     })
     return isAvailable
@@ -52,65 +60,38 @@ export default function useGameMenu({formData, setFormData}) {
   }
 
   const handleAvatarChange = (currentIndex, type) => {
-    const newPlayers = [...formData.players]
-
-    newPlayers[currentIndex].avatar = availableAvatar(
-      newPlayers[currentIndex].avatar,
+    const newAvatar = availableAvatar(
+      watch(`players.${currentIndex}.avatar`),
       type
     )
 
-    setFormData({ ...formData, players: newPlayers })
+    setValue(`players.${currentIndex}.avatar`, newAvatar)
   }
 
-  const increasePlayersNumber = () => {
-    const newPlayers = [...formData.players]
-
-    if (newPlayers.length < game.maxPlayersNumber) {
-      newPlayers.push({
-        name: '',
-        avatar: availableAvatar(0, 'next'),
-        isComputer: false,
-      })
-    }
-
-    setFormData({ ...formData, players: newPlayers })
+  const addPlayer = () => {
+    players.length < game.maxPlayersNumber &&
+      append(
+        {
+          name: '',
+          avatar: availableAvatar(0, 'next'),
+          isComputer: false,
+        },
+        {
+          shouldFocus: false,
+        }
+      )
   }
 
-  const decreasePlayersNumber = () => {
-    const newPlayers = [...formData.players]
-
-    if (newPlayers.length > game.minPlayersNumber) {
-      newPlayers.pop()
-    }
-
-    setFormData({ ...formData, players: newPlayers })
-  }
-
-  const handleNameChange = (e, index) => {
-    const inputFieldValue = e.target.value
-    const inputFieldName = e.target.name
-    const newPlayers = [...formData.players]
-    newPlayers[index][inputFieldName] = inputFieldValue
-    setFormData({ ...formData, players: newPlayers })
-  }
-
-  const toggleIsComputer = (e, index) => {
-    const inputFieldName = e.target.name
-    const newPlayers = [...formData.players]
-    newPlayers[index][inputFieldName] = !newPlayers[index][inputFieldName]
-    setFormData({ ...formData, players: newPlayers })
+  const removePlayer = () => {
+    players.length > game.minPlayersNumber && remove(players.length - 1)
   }
 
   const startGame = () => {
-    dispatch(setNewPlayers(formData.players))
+    dispatch(setNewPlayers(players))
     dispatch(updateIsOver(false))
     dispatch(hideEndTurnMessage())
     setGameHasToStart(true)
-    //! Réinitialiser le tableau des joueurs éliminés !!!
-  }
-
-  const handleFormSubmit = () => {
-    startGame()
+    dispatch(resetEliminatedPlayers())
   }
 
   useEffect(() => {
@@ -128,11 +109,9 @@ export default function useGameMenu({formData, setFormData}) {
 
   return {
     handleAvatarChange: handleAvatarChange,
-    increasePlayersNumber: increasePlayersNumber,
-    decreasePlayersNumber: decreasePlayersNumber,
-    handleNameChange: handleNameChange,
-    toggleIsComputer: toggleIsComputer,
-    handleFormSubmit: handleFormSubmit,
+    addPlayer: addPlayer,
+    removePlayer: removePlayer,
+    startGame: startGame,
     closeMenu: closeMenu,
   }
 }

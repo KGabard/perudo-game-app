@@ -11,6 +11,15 @@
     grid-column: span 2;
     @include typographies(subtitle);
   }
+  &__invalidMessage {
+    position: absolute;
+    color: $wrong-secondary;
+    @include typographies(body-italic);
+    bottom: -20px;
+  }
+  &__inputContainer {
+    position: relative;
+  }
   &__input {
     width: 170px;
     height: 24px;
@@ -18,7 +27,7 @@
     padding: 0 4px;
     @include typographies(body);
     outline: none;
-    &.wrong {
+    &.isInvalid {
       border: 3px solid $wrong-secondary;
     }
   }

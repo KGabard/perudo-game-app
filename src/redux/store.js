@@ -95,6 +95,10 @@ const playersSlice = createSlice({
       state.eliminatedPlayers.unshift(action.payload)
       return state
     },
+    resetEliminatedPlayers: (state) => {
+      state.eliminatedPlayers = []
+      return state
+    },
     setNewPlayers: (state, action) => {
       const newPlayers = []
 
@@ -139,6 +143,7 @@ export const {
   resetWrongRightAllPlayers,
   eliminatePlayer,
   setNewPlayers,
+  resetEliminatedPlayers,
 } = playersSlice.actions
 
 const gameSlice = createSlice({

@@ -90,6 +90,7 @@
     align-self: end;
     margin-top: 16px;
     @include button($ok-button-width, $ok-button-height, $neutral-secondary);
+    color: $basic-white;
   }
 }
 
@@ -121,11 +122,11 @@
     border: 3px solid $basic-white;
     border-radius: 8px;
     grid-row: span 2;
-    outline: none;
-    caret-color: transparent;
-    color: $basic-white;
-    background: transparent;
-    text-align: center;
+    // outline: none;
+    // caret-color: transparent;
+    // color: $basic-white;
+    // background: transparent;
+    // text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;

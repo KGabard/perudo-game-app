@@ -11,9 +11,16 @@ import ControlsMenu from './Layouts/ControlsMenu'
 import RulesMenu from './Layouts/RulesMenu'
 import SettingsMenu from './Layouts/SettingsMenu'
 import useMusic from './hooks/useMusic'
+import usePlayersData from './hooks/usePlayersData'
 
 function App() {
   const { game } = useGameData()
+
+  const {eliminatedPlayers} = usePlayersData()
+  useEffect(() => {
+    console.log("Eliminated players :");
+    console.log(eliminatedPlayers);
+  }, [eliminatedPlayers])
 
   const dispatch = useDispatch()
   useEffect(() => {
