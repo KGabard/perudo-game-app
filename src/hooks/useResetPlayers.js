@@ -3,7 +3,7 @@ import {
   resetWrongRightAllPlayers,
   updateHasToPlay,
   eliminatePlayer,
-} from '../redux/store'
+} from '../redux/features/playersSlice'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import usePlayersData from './usePlayersData'

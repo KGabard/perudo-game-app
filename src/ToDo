@@ -1,0 +1,18 @@
+
+
+- Gérer l'agrandissement du cadre de jeu quand les menus option sont ouvert
+
+- Ajouter des effets sonores ?
+- Ajouter des animations ? (ex: dés qui roulent)
+- Gérer le responsive sur petit écran
+- Régler le bug quand l'ordi commence la partie
+
+- Rédiger le readme : Expliquer le projet et les technos utilisées
+
+
+
+x Boutton "Nouvelle Partie" & Améliorer la présentation de fin de partie.
+x Message d'alerte dans Game Menu : si !game.isOver && activePlayers.length > 0 => "Une partie en cours. Ceci réinitialisera la partie."
+x Mettre en pause l'ordi quand un menu est ouvert
+x Faire écran d'acceuil
+x Séparer les slices game et player et le store

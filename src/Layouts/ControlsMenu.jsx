@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { hideMenu } from '../redux/store'
+import { hideMenu } from '../redux/features/gameSlice'
+import { updateHasToPlay } from '../redux/features/playersSlice'
 import { v4 as uuidv4 } from 'uuid'
 
 import upArrowKey from '../Assets/Images/upArrowKey.png'
@@ -13,11 +14,17 @@ import ctrlKey from '../Assets/Images/ctrlKey.png'
 import zeroKey from '../Assets/Images/zeroKey.png'
 
 import Control from '../Components/Control'
+import usePlayersData from '../hooks/usePlayersData'
 
 export default function ControlsMenu() {
+  const { activePlayers } = usePlayersData()
   const dispatch = useDispatch()
 
   const closeMenu = () => {
+    activePlayers.forEach((item) => {
+      item.isActive &&
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+    })
     dispatch(hideMenu('controls'))
   }
 

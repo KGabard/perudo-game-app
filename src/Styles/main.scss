@@ -16,6 +16,8 @@
 @import './Components/computer-speed.scss';
 @import './Components/computer-bluff.scss';
 @import './Components/music.scss';
+@import './Components/new-game-btn.scss';
+@import './Components/play-btn.scss';
 
 @import './Layouts/header.scss';
 @import './Layouts/footer.scss';
@@ -25,7 +27,9 @@
 @import './Layouts/game-table.scss';
 @import './Layouts/error-message.scss';
 @import './Layouts/end-turn-message.scss';
+@import './Layouts/end-game-message.scss';
 @import './Layouts/game-menu.scss';
 @import './Layouts/controls-menu.scss';
 @import './Layouts/rules-menu.scss';
 @import './Layouts/settings-menu.scss';
+@import './Layouts/home-page.scss';

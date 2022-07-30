@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateHasToPlay } from '../redux/store'
+import { updateHasToPlay } from '../redux/features/playersSlice'
 import useActions from './useActions'
 import useBidData from './useBidData'
 import useComputer from './useComputer'

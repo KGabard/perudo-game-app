@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  displayErrorMessage,
   updateHasToPlay,
   updateIsRight,
   updateIsWrong,
-} from '../redux/store'
+} from '../redux/features/playersSlice'
+import { displayErrorMessage } from '../redux/features/gameSlice'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import useEndTurnMessage from './useEndTurnMessage'
-import useGameData from './useGameData'
+// import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 
 export default function useActions() {
@@ -16,7 +16,7 @@ export default function useActions() {
   const game = useSelector((state) => state.game)
 
   const { nextPlayer, previousPlayer, desactivateAllPlayers } = usePlayersData()
-  const { checkIsPalifico } = useGameData()
+  // const { checkIsPalifico } = useGameData()
   const { setBidCount, setBidValue, checkBidProposal, checkBid, previousBid } =
     useBidData()
   const { removeDice, addDice, showPlayersDices } = useDices()

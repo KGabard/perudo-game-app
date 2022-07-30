@@ -1,6 +1,6 @@
 import useGameData from '../hooks/useGameData'
 import { useDispatch } from 'react-redux'
-import { toggleComputerBluff } from '../redux/store'
+import { toggleComputerBluff } from '../redux/features/gameSlice'
 
 export default function ComputerBluff() {
   const { game } = useGameData()

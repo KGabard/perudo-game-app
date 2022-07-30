@@ -1,11 +1,18 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { hideMenu } from '../redux/store'
+import usePlayersData from '../hooks/usePlayersData'
+import { updateHasToPlay } from '../redux/features/playersSlice'
+import { hideMenu } from '../redux/features/gameSlice'
 
 export default function RulesMenu() {
+  const { activePlayers } = usePlayersData()
   const dispatch = useDispatch()
 
   const closeMenu = () => {
+    activePlayers.forEach((item) => {
+      item.isActive &&
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+    })
     dispatch(hideMenu('rules'))
   }
 

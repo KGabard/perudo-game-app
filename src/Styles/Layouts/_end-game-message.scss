@@ -1,0 +1,16 @@
+.endGameMessage {
+  @include message-window;
+  width: fit-content;
+  &__header {
+    width: 100%;
+    text-align: center;
+    @include typographies(header);
+  }
+  &__body {
+    @include typographies(body);
+  }
+  &__newGameBtn {
+    align-self: end;
+    @include button($next-turn-button-width, $next-turn-button-height);
+  }
+}

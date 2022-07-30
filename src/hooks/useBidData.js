@@ -1,15 +1,12 @@
 import { useDispatch } from 'react-redux/'
 import usePlayersData from './usePlayersData'
-import {
-  displayErrorMessage,
-  updateBidCount,
-  updateBidValue,
-} from '../redux/store'
+import { updateBidCount, updateBidValue } from '../redux/features/playersSlice'
 import useGameData from './useGameData'
 import useDices from './useDices'
+import { displayErrorMessage } from '../redux/features/gameSlice'
 
 export default function useBidData() {
-  const { activePlayers } = usePlayersData()
+  // const { activePlayers } = usePlayersData()
   const { game } = useGameData()
 
   const { totalPlayersDices, previousPlayer } = usePlayersData()

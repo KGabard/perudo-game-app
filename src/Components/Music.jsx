@@ -6,7 +6,11 @@ import pauseBtn from '../Assets/Images/pauseMusic.png'
 import nextBtn from '../Assets/Images/nextMusic.png'
 import prevBtn from '../Assets/Images/prevMusic.png'
 import { useDispatch } from 'react-redux'
-import { nextMusic, previousMusic, toggleIsMusicPlaying } from '../redux/store'
+import {
+  nextMusic,
+  previousMusic,
+  toggleIsMusicPlaying,
+} from '../redux/features/gameSlice'
 
 export default function Music() {
   const { game } = useGameData()
@@ -15,7 +19,9 @@ export default function Music() {
 
   return (
     <div className="music">
-      <p className="music__label">{`Musique : ${currentMusic.name[0].toUpperCase() + currentMusic.name.substring(1)}`}</p>
+      <p className="music__label">{`Musique : ${
+        currentMusic.name[0].toUpperCase() + currentMusic.name.substring(1)
+      }`}</p>
       <div className="music__player">
         <img
           onClick={() => dispatch(previousMusic())}

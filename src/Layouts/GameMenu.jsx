@@ -1,15 +1,15 @@
 import PlayerForm from '../Components/PlayerForm'
 import PlayersNumber from '../Components/PlayersNumber'
-import { useState } from 'react'
 import useGameMenu from '../hooks/useGameMenu'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import useGameData from '../hooks/useGameData'
-import { useEffect } from 'react'
+import usePlayersData from '../hooks/usePlayersData'
 
 export default function GameMenu() {
   const { game } = useGameData()
+  const { activePlayers } = usePlayersData()
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -87,9 +87,16 @@ export default function GameMenu() {
               />
             )
           })}
-          <button type="submit" className="gameMenu__okBtn">
-            ok
-          </button>
+          <div className="gameMenu__okBtnContainer">
+            {!game.isOver && activePlayers.length > 0 && (
+              <p className="gameMenu__alertMessage">
+                {'Une partie est en cours.\n Ceci réinitialisera la partie.'}
+              </p>
+            )}
+            <button type="submit" className="gameMenu__okBtn">
+              ok
+            </button>
+          </div>
         </form>
       </div>
     </div>

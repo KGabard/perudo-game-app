@@ -4,9 +4,9 @@ import Navbar from '../Components/Navbar'
 
 export default function Header() {
   return (
-    <div className='header'>
-        <img className='header__logo' src={logo} alt="peroquet" />
-        <Navbar />
+    <div className="header">
+      <img className="header__logo" src={logo} alt="peroquet" />
+      <Navbar />
     </div>
   )
 }

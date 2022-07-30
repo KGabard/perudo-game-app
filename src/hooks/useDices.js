@@ -4,7 +4,7 @@ import {
   updateDiceCount,
   updateDices,
   updateDicesDisplay,
-} from '../redux/store'
+} from '../redux/features/playersSlice'
 import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 

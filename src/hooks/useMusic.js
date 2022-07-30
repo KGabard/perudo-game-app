@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { toggleIsMusicPlaying } from '../redux/store'
 import useGameData from './useGameData'
 
 export default function useMusic() {
   const { game } = useGameData()
-  const dispatch = useDispatch()
 
   const [trackList, setTrackList] = useState([])
 

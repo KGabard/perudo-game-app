@@ -1,7 +1,10 @@
 import useGameData from '../hooks/useGameData'
 import arrowIcon from '../Assets/Images/arrow.svg'
 import { useDispatch } from 'react-redux'
-import { decreaseComputerSpeed, increaseComputerSpeed } from '../redux/store'
+import {
+  decreaseComputerSpeed,
+  increaseComputerSpeed,
+} from '../redux/features/gameSlice'
 
 export default function ComputerSpeed() {
   const { game } = useGameData()
@@ -17,7 +20,7 @@ export default function ComputerSpeed() {
           src={arrowIcon}
           className="computerSpeed__upArrow"
           alt="Flèche haut"
-          ></img>
+        ></img>
         <img
           onClick={() => dispatch(decreaseComputerSpeed())}
           src={arrowIcon}

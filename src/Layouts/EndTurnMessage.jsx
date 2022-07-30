@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import useEndTurnMessage from '../hooks/useEndTurnMessage'
 import useGameData from '../hooks/useGameData'
-import { expandEndTurnMessage } from '../redux/store'
+import { expandEndTurnMessage } from '../redux/features/gameSlice'
 
 export default function EndTurnMessage() {
   const { game } = useGameData()

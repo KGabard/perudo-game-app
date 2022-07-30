@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateIsOver, updateIsPalifico } from '../redux/store'
+import { updateIsOver, updateIsPalifico } from '../redux/features/gameSlice'
 import usePlayersData from './usePlayersData'
 
 export default function useGameData() {

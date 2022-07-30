@@ -3,12 +3,19 @@ import { useDispatch } from 'react-redux'
 import ComputerBluff from '../Components/ComputerBluff'
 import ComputerSpeed from '../Components/ComputerSpeed'
 import Music from '../Components/Music'
-import { hideMenu } from '../redux/store'
+import usePlayersData from '../hooks/usePlayersData'
+import { updateHasToPlay } from '../redux/features/playersSlice'
+import { hideMenu } from '../redux/features/gameSlice'
 
 export default function SettingsMenu() {
+  const { activePlayers } = usePlayersData()
   const dispatch = useDispatch()
 
   const closeMenu = () => {
+    activePlayers.forEach((item) => {
+      item.isActive &&
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+    })
     dispatch(hideMenu('settings'))
   }
 

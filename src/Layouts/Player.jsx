@@ -6,7 +6,7 @@ import useGameData from '../hooks/useGameData'
 
 export default function Player(props) {
   const currentPlayer = props.playerData
-  const {game} = useGameData()
+  const { game } = useGameData()
 
   const ref = useRef()
 

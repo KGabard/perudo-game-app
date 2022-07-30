@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {
-  hideEndTurnMessage,
-  hideMenu,
   resetEliminatedPlayers,
   setNewPlayers,
+  updateHasToPlay,
+} from '../redux/features/playersSlice'
+import {
+  hideEndTurnMessage,
+  hideMenu,
   updateIsOver,
-} from '../redux/store'
+} from '../redux/features/gameSlice'
 import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 import useResetPlayers from './useResetPlayers'
@@ -104,6 +107,10 @@ export default function useGameMenu({ watch, setValue, append, remove }) {
   }, [gameHasToStart])
 
   const closeMenu = () => {
+    activePlayers.forEach((item) => {
+      item.isActive &&
+        dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
+    })
     dispatch(hideMenu('game'))
   }
 

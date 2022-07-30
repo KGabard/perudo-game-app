@@ -1,0 +1,19 @@
+.newGameBtn {
+  @include button;
+  width: 240px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: $highlight-primary;
+  box-shadow: 0px 0px 1px 1px transparent;
+  animation: pulse-animation 2s infinite;
+  position: relative;
+  align-self: end;
+  &:hover {
+    animation: none;
+  }
+  &.alone {
+    top: -56px;
+    align-self: end;
+    align-self: auto;
+  }
+}

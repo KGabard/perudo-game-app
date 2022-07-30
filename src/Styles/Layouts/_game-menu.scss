@@ -5,4 +5,16 @@
     flex-direction: column;
     gap: 16px;
   }
+  &__okBtnContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  &__alertMessage {
+    @include typographies(body-italic);
+    text-align: end;
+    white-space: pre-wrap;
+    align-self: end;
+    position: relative;
+    top: 12px;
+  }
 }

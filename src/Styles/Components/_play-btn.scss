@@ -1,0 +1,51 @@
+.playBtn {
+  @include typographies(subtitle);
+  font-size: clamp(24px, 3vw, 50px);
+  margin-top: 16px;
+  align-self: end;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.2s ease-in;
+  &__letter {
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    &:nth-child(1) {
+      animation-name: neon-shadow-1;
+    }
+    &:nth-child(2) {
+      animation-name: neon-shadow-2;
+    }
+    &:nth-child(3) {
+      animation-name: neon-shadow-3;
+    }
+    &:nth-child(4) {
+      animation-name: neon-shadow-4;
+    }
+    &:nth-child(5) {
+      animation-name: neon-shadow-5;
+    }
+  }
+  &:hover {
+    transform: scale(1.2);
+    // color: $highlight-secondary;
+    text-shadow: 0 0 20px $basic-white;
+    & .playBtn__letter {
+      &:nth-child(1) {
+        animation: none;
+      }
+      &:nth-child(2) {
+        animation: none;
+      }
+      &:nth-child(3) {
+        animation: none;
+      }
+      &:nth-child(4) {
+        animation: none;
+      }
+      &:nth-child(5) {
+        animation: none;
+      }
+    }
+  }
+}

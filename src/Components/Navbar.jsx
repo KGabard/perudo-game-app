@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import useGameData from '../hooks/useGameData'
-import { activateMenu } from '../redux/store'
+import { activateMenu } from '../redux/features/gameSlice'
 
 export default function Navbar() {
   const { game } = useGameData()

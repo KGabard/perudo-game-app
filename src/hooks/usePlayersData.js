@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  updateIsActive,
-} from '../redux/store'
+import { updateIsActive } from '../redux/features/playersSlice'
 
 export default function usePlayersData() {
   const activePlayers = useSelector((state) => state.players.activePlayers)

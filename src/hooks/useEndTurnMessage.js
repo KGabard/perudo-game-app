@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
+import { updateHasToPlay } from '../redux/features/playersSlice'
 import {
   displayEndTurnMessage,
   hideEndTurnMessage,
   incrementTurnCounter,
-  updateHasToPlay,
-} from '../redux/store'
+} from '../redux/features/gameSlice'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import useGameData from './useGameData'

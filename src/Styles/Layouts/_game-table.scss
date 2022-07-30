@@ -6,8 +6,11 @@
     min-height: fit-content;
     flex-grow: 1;
     margin-top: 32px;
+    display: flex;
+    flex-direction: column;
     &__content {
         width: 100%;
+        flex-grow: 1;
         margin: 64px 0 72px 0;
         display: flex;
         flex-direction: column;

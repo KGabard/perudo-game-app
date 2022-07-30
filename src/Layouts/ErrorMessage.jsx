@@ -2,7 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import useGameData from '../hooks/useGameData'
 import usePlayersData from '../hooks/usePlayersData'
-import { hideErrorMessage, updateHasToPlay } from '../redux/store'
+import { updateHasToPlay } from '../redux/features/playersSlice'
+import { hideErrorMessage } from '../redux/features/gameSlice'
 
 export default function ErrorMessage() {
   const { activePlayers } = usePlayersData()
