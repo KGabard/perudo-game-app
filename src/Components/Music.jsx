@@ -1,16 +1,15 @@
 import React from 'react'
 import useGameData from '../hooks/useGameData'
-
-import playBtn from '../Assets/Images/playMusic.png'
-import pauseBtn from '../Assets/Images/pauseMusic.png'
-import nextBtn from '../Assets/Images/nextMusic.png'
-import prevBtn from '../Assets/Images/prevMusic.png'
 import { useDispatch } from 'react-redux'
 import {
   nextMusic,
   previousMusic,
   toggleIsMusicPlaying,
 } from '../redux/features/gameSlice'
+import { ReactComponent as PlayBtn } from '../Assets/Images/musicPlay.svg'
+import { ReactComponent as PauseBtn } from '../Assets/Images/musicPause.svg'
+import { ReactComponent as NextBtn } from '../Assets/Images/musicNext.svg'
+import { ReactComponent as PrevBtn } from '../Assets/Images/musicPrev.svg'
 
 export default function Music() {
   const { game } = useGameData()
@@ -23,21 +22,26 @@ export default function Music() {
         currentMusic.name[0].toUpperCase() + currentMusic.name.substring(1)
       }`}</p>
       <div className="music__player">
-        <img
+        <PrevBtn
           onClick={() => dispatch(previousMusic())}
-          src={prevBtn}
           alt="Bouton précédent"
           className="music__prevBtn"
         />
-        <img
-          onClick={() => dispatch(toggleIsMusicPlaying())}
-          src={game.music.isPlaying ? pauseBtn : playBtn}
-          alt="Bouton play"
-          className="music__playBtn"
-        />
-        <img
+        {game.music.isPlaying ? (
+          <PauseBtn
+            onClick={() => dispatch(toggleIsMusicPlaying())}
+            alt="Bouton play"
+            className="music__playBtn"
+          />
+        ) : (
+          <PlayBtn
+            onClick={() => dispatch(toggleIsMusicPlaying())}
+            alt="Bouton play"
+            className="music__playBtn"
+          />
+        )}
+        <NextBtn
           onClick={() => dispatch(nextMusic())}
-          src={nextBtn}
           alt="Bouton suivant"
           className="music__nextBtn"
         />

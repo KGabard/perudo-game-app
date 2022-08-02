@@ -63,6 +63,7 @@ export default function Bid(props) {
           value={currentPlayer.bid.value}
           isDisplayed={true}
           isDisabled={false}
+          isBidDice={true}
         />
         {isHumanPlaying && (
           <img

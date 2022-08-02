@@ -50,7 +50,7 @@ export default function useActionBar({ player, panelRef, play, setPlay }) {
   }, [play])
 
   useEffect(() => {
-    if (player.hasToPlay) {
+    if (player.hasToPlay && !game.isPause) {
       dispatch(updateHasToPlay({ player: player, hasToPlay: false }))
       activatePlayer(player, panelRef)
       player.isComputer &&
@@ -58,7 +58,7 @@ export default function useActionBar({ player, panelRef, play, setPlay }) {
           setPlay(computerPlay(player))
         }, computeTime())
     }
-  }, [player.hasToPlay])
+  }, [player.hasToPlay, game.isPause])
 
   useEffect(() => {
     const keyDown = (event) => {

@@ -1,12 +1,15 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import usePlayersData from '../hooks/usePlayersData'
 import { updateHasToPlay } from '../redux/features/playersSlice'
-import { hideMenu } from '../redux/features/gameSlice'
+import { hideMenu, updateMenuHeight } from '../redux/features/gameSlice'
+import { useRef } from 'react'
 
 export default function RulesMenu() {
   const { activePlayers } = usePlayersData()
   const dispatch = useDispatch()
+
+  const windowRef = useRef()
 
   const closeMenu = () => {
     activePlayers.forEach((item) => {
@@ -16,10 +19,19 @@ export default function RulesMenu() {
     dispatch(hideMenu('rules'))
   }
 
+  useEffect(() => {
+    dispatch(
+      updateMenuHeight({
+        menu: 'rules',
+        height: windowRef.current.clientHeight,
+      })
+    )
+  }, [])
+
   return (
     <div className="rulesMenu">
       <div onClick={closeMenu} className="rulesMenu__overlay"></div>
-      <div className="rulesMenu__window">
+      <div className="rulesMenu__window" ref={windowRef}>
         <h1 className="rulesMenu__header">Règles</h1>
         <h2 className="rulesMenu__title">I – Déroulement de la partie</h2>
         <section className="rulesMenu__body">

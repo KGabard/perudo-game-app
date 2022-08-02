@@ -6,10 +6,17 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import useGameData from '../hooks/useGameData'
 import usePlayersData from '../hooks/usePlayersData'
+import { useEffect } from 'react'
+import { useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateMenuHeight } from '../redux/features/gameSlice'
 
 export default function GameMenu() {
   const { game } = useGameData()
   const { activePlayers } = usePlayersData()
+
+  const windowRef = useRef()
+  const dispatch = useDispatch()
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -49,8 +56,6 @@ export default function GameMenu() {
   const { errors } = formState
   const { fields, append, remove } = useFieldArray({ name: 'players', control })
 
-  console.log(watch('players'))
-
   const numberOfPlayers = watch('players').length
 
   const { handleAvatarChange, addPlayer, removePlayer, startGame, closeMenu } =
@@ -61,10 +66,16 @@ export default function GameMenu() {
       remove: remove,
     })
 
+  useEffect(() => {
+    dispatch(
+      updateMenuHeight({ menu: 'game', height: windowRef.current.clientHeight })
+    )
+  }, [numberOfPlayers])
+
   return (
     <div className="gameMenu">
       <div onClick={closeMenu} className="gameMenu__overlay"></div>
-      <div className="gameMenu__window">
+      <div className="gameMenu__window" ref={windowRef}>
         <h1 className="gameMenu__header">Nouvelle Partie ?</h1>
         <form onSubmit={handleSubmit(startGame)} className="gameMenu__form">
           <PlayersNumber

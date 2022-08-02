@@ -4,12 +4,14 @@ import {
   displayEndTurnMessage,
   hideEndTurnMessage,
   incrementTurnCounter,
+  updateDicesAreRolling,
 } from '../redux/features/gameSlice'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
 import useResetPlayers from './useResetPlayers'
+import useSoundEffects from './useSoundEffects'
 
 export default function useEndTurnMessage() {
   const { activePlayers, previousPlayer } = usePlayersData()
@@ -17,6 +19,7 @@ export default function useEndTurnMessage() {
   const { checkBid, previousBid } = useBidData()
   const { countDiceOf, hidePlayersDices } = useDices()
   const { resetPlayer } = useResetPlayers()
+  const { playSound } = useSoundEffects()
 
   const dispatch = useDispatch()
 
@@ -152,6 +155,8 @@ export default function useEndTurnMessage() {
 
   const nextTurn = () => {
     checkIsPalifico()
+    dispatch(hideEndTurnMessage())
+    dispatch(incrementTurnCounter())
     activePlayers.forEach((item) => {
       item.isWrong &&
         dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
@@ -159,9 +164,7 @@ export default function useEndTurnMessage() {
         dispatch(updateHasToPlay({ player: item, hasToPlay: true }))
       resetPlayer(item)
     })
-    dispatch(hideEndTurnMessage())
-    dispatch(incrementTurnCounter())
-    hidePlayersDices()
+    dispatch(updateDicesAreRolling(true))
   }
 
   return {

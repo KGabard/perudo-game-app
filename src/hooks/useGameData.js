@@ -1,6 +1,10 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateIsOver, updateIsPalifico } from '../redux/features/gameSlice'
+import {
+  updateDicesAreRolling,
+  updateIsOver,
+  updateIsPalifico,
+} from '../redux/features/gameSlice'
 import usePlayersData from './usePlayersData'
 
 export default function useGameData() {
@@ -12,7 +16,10 @@ export default function useGameData() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    activePlayers.length <= 1 && dispatch(updateIsOver(true))
+    if (activePlayers.length <= 1) {
+      dispatch(updateIsOver(true))
+      dispatch(updateDicesAreRolling(false))
+    }
   }, [dispatch, activePlayers.length])
 
   const checkIsPalifico = () => {

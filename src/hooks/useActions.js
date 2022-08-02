@@ -8,19 +8,20 @@ import { displayErrorMessage } from '../redux/features/gameSlice'
 import useBidData from './useBidData'
 import useDices from './useDices'
 import useEndTurnMessage from './useEndTurnMessage'
-// import useGameData from './useGameData'
 import usePlayersData from './usePlayersData'
+import useSoundEffects from './useSoundEffects'
 
 export default function useActions() {
   const activePlayers = useSelector((state) => state.players.activePlayers)
   const game = useSelector((state) => state.game)
 
   const { nextPlayer, previousPlayer, desactivateAllPlayers } = usePlayersData()
-  // const { checkIsPalifico } = useGameData()
   const { setBidCount, setBidValue, checkBidProposal, checkBid, previousBid } =
     useBidData()
   const { removeDice, addDice, showPlayersDices } = useDices()
   const { createEndTurnMessage } = useEndTurnMessage()
+
+  const { playSound } = useSoundEffects()
 
   const dispatch = useDispatch()
 
@@ -39,6 +40,7 @@ export default function useActions() {
       setBidCount(nextPlayer(player), player.bid.count)
       setBidValue(nextPlayer(player), player.bid.value)
       dispatch(updateHasToPlay({ player: nextPlayer(player), hasToPlay: true }))
+      playSound('makeBid')
     }
   }
 
@@ -66,10 +68,12 @@ export default function useActions() {
           case 'dudo':
             removeDice(player)
             dispatch(updateIsWrong({ player: player, isWrong: true }))
+            playSound('valid')
             break
           case 'calza':
             addDice(player)
             dispatch(updateIsRight({ player: player, isRight: true }))
+            playSound('valid')
             break
           default:
             break
@@ -81,10 +85,12 @@ export default function useActions() {
             dispatch(
               updateIsWrong({ player: previousPlayer(player), isWrong: true })
             )
+            playSound('wrong')
             break
           case 'calza':
             removeDice(player)
             dispatch(updateIsWrong({ player: player, isWrong: true }))
+            playSound('wrong')
             break
           default:
             break

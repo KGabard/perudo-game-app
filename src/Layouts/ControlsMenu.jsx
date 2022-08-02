@@ -1,6 +1,6 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { hideMenu } from '../redux/features/gameSlice'
+import { hideMenu, updateMenuHeight } from '../redux/features/gameSlice'
 import { updateHasToPlay } from '../redux/features/playersSlice'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -15,10 +15,13 @@ import zeroKey from '../Assets/Images/zeroKey.png'
 
 import Control from '../Components/Control'
 import usePlayersData from '../hooks/usePlayersData'
+import { useRef } from 'react'
 
 export default function ControlsMenu() {
   const { activePlayers } = usePlayersData()
   const dispatch = useDispatch()
+
+  const windowRef = useRef()
 
   const closeMenu = () => {
     activePlayers.forEach((item) => {
@@ -28,10 +31,19 @@ export default function ControlsMenu() {
     dispatch(hideMenu('controls'))
   }
 
+  useEffect(() => {
+    dispatch(
+      updateMenuHeight({
+        menu: 'controls',
+        height: windowRef.current.clientHeight,
+      })
+    )
+  }, [])
+
   return (
     <div className="controlsMenu">
       <div onClick={closeMenu} className="controlsMenu__overlay"></div>
-      <div className="controlsMenu__window">
+      <div className="controlsMenu__window" ref={windowRef}>
         <h1 className="controlsMenu__header">Commandes</h1>
         <div className="controlsMenu__controls">
           <Control

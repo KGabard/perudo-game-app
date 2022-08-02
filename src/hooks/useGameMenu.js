@@ -8,6 +8,7 @@ import {
 import {
   hideEndTurnMessage,
   hideMenu,
+  updateDicesAreRolling,
   updateIsOver,
 } from '../redux/features/gameSlice'
 import useGameData from './useGameData'
@@ -95,6 +96,7 @@ export default function useGameMenu({ watch, setValue, append, remove }) {
     dispatch(hideEndTurnMessage())
     setGameHasToStart(true)
     dispatch(resetEliminatedPlayers())
+    dispatch(updateDicesAreRolling(true))
   }
 
   useEffect(() => {

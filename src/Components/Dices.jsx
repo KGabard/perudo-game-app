@@ -21,6 +21,7 @@ export default function Dices(props) {
                 change={
                   currentPlayer.diceChanges && currentPlayer.diceChanges[index]
                 }
+                isBidDice={false}
               />
             )
           })}
@@ -35,6 +36,7 @@ export default function Dices(props) {
                   currentPlayer.diceChanges &&
                   currentPlayer.diceChanges[index + currentPlayer.dices.length]
                 }
+                isBidDice={false}
               />
             )
           })}

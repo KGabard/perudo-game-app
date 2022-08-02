@@ -10,12 +10,15 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
-    gap: 8px;
-    & img {
+    gap: 0px;
+    & svg {
       height: 56px;
       width: 56px;
-      object-fit: contain;
       cursor: pointer;
+      stroke: $basic-white;
+      &:hover {
+        stroke: $neutral-secondary;
+      }
     }
   }
 }

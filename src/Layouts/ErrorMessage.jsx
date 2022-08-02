@@ -1,15 +1,22 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import useGameData from '../hooks/useGameData'
 import usePlayersData from '../hooks/usePlayersData'
 import { updateHasToPlay } from '../redux/features/playersSlice'
 import { hideErrorMessage } from '../redux/features/gameSlice'
+import { useEffect } from 'react'
+import useSoundEffects from '../hooks/useSoundEffects'
 
 export default function ErrorMessage() {
   const { activePlayers } = usePlayersData()
   const { game } = useGameData()
 
+  const { playSound } = useSoundEffects()
+
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    playSound('error')
+  }, [])
 
   const closeErrorMessage = () => {
     activePlayers.forEach((item) => {

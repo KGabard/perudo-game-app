@@ -6,7 +6,6 @@ import useDices from './useDices'
 import { displayErrorMessage } from '../redux/features/gameSlice'
 
 export default function useBidData() {
-  // const { activePlayers } = usePlayersData()
   const { game } = useGameData()
 
   const { totalPlayersDices, previousPlayer } = usePlayersData()
@@ -15,6 +14,7 @@ export default function useBidData() {
   const dispatch = useDispatch()
 
   const increaseBidCount = (player) => {
+    if (game.isPause) return
     let newCount = undefined
     isNaN(player.bid.count)
       ? (newCount = 1)
@@ -25,6 +25,7 @@ export default function useBidData() {
   }
 
   const decreaseBidCount = (player) => {
+    if (game.isPause) return
     let newCount = undefined
     isNaN(player.bid.count)
       ? (newCount = 1)
@@ -35,6 +36,7 @@ export default function useBidData() {
   }
 
   const increaseBidValue = (player) => {
+    if (game.isPause) return
     let newValue = undefined
     isNaN(player.bid.value)
       ? (newValue = 1)
@@ -45,6 +47,7 @@ export default function useBidData() {
   }
 
   const decreaseBidValue = (player) => {
+    if (game.isPause) return
     let newValue = undefined
     isNaN(player.bid.value)
       ? (newValue = 1)

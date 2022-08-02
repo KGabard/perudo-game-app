@@ -1,59 +1,56 @@
+import { useState } from 'react'
+import { useEffect } from 'react'
 import crossIcon from '../Assets/Images/CrossIcon.svg'
 import plusIcon from '../Assets/Images/PlusIcon.svg'
+import useGameData from './useGameData'
 
-export default function useDice(props) {
+export default function useDice({
+  value,
+  isDisplayed,
+  isDisabled,
+  change,
+  isBidDice,
+}) {
   let diceFace
-  let isDisabled
   let changeIcon
   let diceClass
 
-  switch (props.value) {
-    case 1:
-      diceFace = 'diceFace1'
-      break
-    case 2:
-      diceFace = 'diceFace2'
-      break
-    case 3:
-      diceFace = 'diceFace3'
-      break
-    case 4:
-      diceFace = 'diceFace4'
-      break
-    case 5:
-      diceFace = 'diceFace5'
-      break
-    case 6:
-      diceFace = 'diceFace6'
-      break
+  const [diceValue, setDiceValue] = useState(value)
+  const [rollInterval, setRollInterval] = useState(10)
+  const [rollEvolCoef, setRollEvolCoef] = useState(1)
 
-    default:
-      diceFace = 'diceFaceEmpty'
-      break
-  }
+  const { game } = useGameData()
 
-  switch (props.isDisplayed) {
-    case true:
-      break
+  useEffect(() => {
+    if (game.dicesAreRolling) {
+      setRollEvolCoef(Math.random() * 2.5 + 1.1)
+    }
+  }, [game.dicesAreRolling])
 
-    default:
-      diceFace = 'diceFaceEmpty'
-      break
-  }
+  useEffect(() => {
+    let rolling
+    if (game.dicesAreRolling && !isBidDice && !isDisabled) {
+      rolling = setTimeout(() => {
+        let newValue
+        do {
+          newValue = Math.ceil(Math.random() * 5)
+        } while (newValue === diceValue)
+        setDiceValue(newValue)
+        setRollInterval(rollInterval * rollEvolCoef)
+      }, rollInterval)
+    }
+    return () => clearTimeout(rolling)
+  }, [diceValue])
 
-  switch (props.isDisabled) {
-    case true:
-      isDisabled = 'disabled'
-      break
+  isNaN(diceValue) || !isDisplayed
+    ? (diceFace = 'diceFaceEmpty')
+    : (diceFace = `diceFace${diceValue}`)
 
-    default:
-      isDisabled = ''
-      break
-  }
+  diceClass = 'dice ' + diceFace
 
-  diceClass = 'dice ' + diceFace + ' ' + isDisabled
+  isDisabled ? (diceClass += ' disabled') : (diceClass += '')
 
-  switch (props.change) {
+  switch (change) {
     case 'x':
       changeIcon = crossIcon
       break

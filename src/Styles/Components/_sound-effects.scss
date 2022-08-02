@@ -1,0 +1,12 @@
+.soundEffects {
+  @include menu-component;
+  &__mute {
+    height: 56px;
+    margin-right: 16px;
+    cursor: pointer;
+    stroke: $basic-white;
+    &:hover {
+      stroke: $neutral-secondary;
+    }
+  }
+}

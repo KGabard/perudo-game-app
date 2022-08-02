@@ -17,8 +17,8 @@ export default function useResetPlayers() {
 
   const resetPlayer = (player) => {
     dispatch(resetWrongRightAllPlayers())
-    randomizePlayerDices(player)
     resetPlayerDiceChanges(player)
+    randomizePlayerDices(player)
     setBidCount(player, undefined)
     setBidValue(player, undefined)
     if (player.diceCount <= 0) {

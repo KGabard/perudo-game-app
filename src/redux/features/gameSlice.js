@@ -7,8 +7,8 @@ import playerImage4 from '../../Assets/Images/PlayerImage4.png'
 import playerImage5 from '../../Assets/Images/PlayerImage5.png'
 import playerImage6 from '../../Assets/Images/PlayerImage6.png'
 
-import hangdrumMusic from '../../Assets/Musics/hangdrum.wav'
-import panfluteMusic from '../../Assets/Musics/panflute.wav'
+import hangdrumMusic from '../../Assets/Audio/hangdrum.wav'
+import panfluteMusic from '../../Assets/Audio/panflute.wav'
 
 const initialState = {
   isPause: false,
@@ -39,15 +39,19 @@ const initialState = {
   ],
   gameMenu: {
     isDisplayed: false,
+    height: 0,
   },
   controlsMenu: {
     isDisplayed: false,
+    height: 0,
   },
   rulesMenu: {
     isDisplayed: false,
+    height: 0,
   },
   settingsMenu: {
     isDisplayed: false,
+    height: 0,
   },
   maxDicesPerPlayer: 5,
   maxPlayersNumber: 5,
@@ -67,18 +71,18 @@ const initialState = {
     current: 0,
     isPlaying: false,
   },
+  soundEffects: {
+    muted: false,
+  },
+  dicesAreRolling: false,
 }
 
 const reducers = {
-  updateIsPause: (state) => {
-    state.errorMessage.isDisplayed ||
-    state.endTurnMessage.isDisplayed ||
-    state.gameMenu.isDisplayed ||
-    state.controlsMenu.isDisplayed ||
-    state.rulesMenu.isDisplayed ||
-    state.settingsMenu.isDisplayed
-      ? (state.isPause = true)
-      : (state.isPause = false)
+  updateIsPause: (state, action) => {
+    state.isPause = action.payload
+  },
+  updateDicesAreRolling: (state, action) => {
+    state.dicesAreRolling = action.payload
   },
   updateIsPalifico: (state, action) => {
     state.isPalifico = action.payload
@@ -181,6 +185,29 @@ const reducers = {
     if (state.music.current > 0) state.music.current = state.music.current - 1
     else state.music.current = state.music.list.length - 1
   },
+  updateMenuHeight: (state, action) => {
+    switch (action.payload.menu) {
+      case 'game':
+        state.gameMenu.height = action.payload.height
+        break
+      case 'controls':
+        state.controlsMenu.height = action.payload.height
+        break
+      case 'rules':
+        state.rulesMenu.height = action.payload.height
+        break
+      case 'settings':
+        state.settingsMenu.height = action.payload.height
+        break
+
+      default:
+        break
+    }
+  },
+  toggleSoundEffectsMute: (state) => {
+    console.log('toggleSoundEffectsMute')
+    state.soundEffects.muted = !state.soundEffects.muted
+  },
 }
 
 const gameSlice = createSlice({
@@ -207,6 +234,9 @@ export const {
   toggleIsMusicPlaying,
   nextMusic,
   previousMusic,
+  updateMenuHeight,
+  toggleSoundEffectsMute,
+  updateDicesAreRolling,
 } = gameSlice.actions
 
 export default gameSlice.reducer
