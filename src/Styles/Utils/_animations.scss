@@ -1,12 +1,3 @@
-// @keyframes roll {
-//     0% {
-//         transform: rotate(0deg);
-//     }
-//     100% {
-//         transform: rotate(180deg);
-//     }
-// }
-
 @keyframes neon {
   0% {
     color: $basic-white;
@@ -21,91 +12,72 @@
 
 @keyframes neon-shadow-1 {
   0% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   20% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
   100% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
 }
 
 @keyframes neon-shadow-2 {
   0% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   15% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   35% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
   100% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
 }
 
 @keyframes neon-shadow-3 {
   0% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   30% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   50% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
   100% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
 }
 
 @keyframes neon-shadow-4 {
   0% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   45% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   65% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
   100% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
 }
 
 @keyframes neon-shadow-5 {
   0% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   60% {
-    // color: $highlight-secondary;
     text-shadow: 0 0 10px $basic-white;
   }
   80% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
   100% {
-    // color: $basic-white;
     text-shadow: 0 0 0px $basic-white;
   }
 }

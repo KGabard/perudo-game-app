@@ -219,7 +219,6 @@ const reducers = {
     }
   },
   toggleSoundEffectsMute: (state) => {
-    console.log('toggleSoundEffectsMute')
     state.soundEffects.muted = !state.soundEffects.muted
   },
 }

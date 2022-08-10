@@ -33,7 +33,6 @@
   }
   &:hover {
     transform: scale(1.2);
-    // color: $highlight-secondary;
     text-shadow: 0 0 20px $basic-white;
     & .playBtn__letter {
       &:nth-child(1) {

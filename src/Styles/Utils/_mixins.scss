@@ -17,13 +17,6 @@
   }
 }
 
-// @mixin mobile-typographies($type) {
-//   $mobile-typography: map-get($mobile-typographies, $type);
-//   @each $attribute, $val in $mobile-typography {
-//     #{$attribute}: #{$val};
-//   }
-// }
-
 @mixin button(
   $width: $button-width,
   $height: $button-height,

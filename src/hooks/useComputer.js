@@ -34,10 +34,18 @@ export default function useComputer() {
     let computerPlay
     const dices = bluffDices(player.dices)
 
-    console.log(previousBid(player))
-    console.log(player.dices)
-    console.log(dices)
+    console.log(`Current player: ${player.name}`)
+    console.log('')
+    console.log(
+      `Previous bid - count: ${previousBid(player).count}, dice: ${
+        previousBid(player).value
+      }`
+    )
+    console.log(`Current dices: ${player.dices}`)
+    console.log(`Bluff dices:   ${dices}`)
 
+    console.log(' ')
+    console.log('Probabilities:')
     if (previousBid(player).value === undefined) {
       let currentBidProbability = 0
       for (let tempBidValue = 1; tempBidValue <= 6; tempBidValue++) {
@@ -69,9 +77,15 @@ export default function useComputer() {
         }
 
         console.log(
-          `count: ${tempBidCount}, value: ${tempBidValue}, proba: ${tempBidProbability}`
+          `count: ${tempBidCount}, dice: ${tempBidValue}, proba: ${tempBidProbability}`
         )
       }
+
+      console.log(' ')
+      console.log('Decision:')
+      console.log(
+        `Make bid - count: ${computerBidCount},  dice: ${computerBidValue}`
+      )
 
       setBidCount(player, computerBidCount)
       setBidValue(player, computerBidValue)
@@ -84,6 +98,9 @@ export default function useComputer() {
         currentBidProbability = bidProbability(
           { count: computerBidCount, value: computerBidValue },
           dices
+        )
+        console.log(
+          `count: ${computerBidCount}, dice: ${computerBidValue}, proba: ${currentBidProbability}`
         )
       } else {
         for (let tempBidValue = 1; tempBidValue <= 6; tempBidValue++) {
@@ -105,7 +122,7 @@ export default function useComputer() {
 
           if (tempBidValue === 1 || tempBidValue >= previousBid(player).value) {
             console.log(
-              `count: ${tempBidCount}, value: ${tempBidValue}, proba: ${tempBidProbability}`
+              `count: ${tempBidCount}, dice: ${tempBidValue}, proba: ${tempBidProbability}`
             )
           }
 
@@ -139,32 +156,38 @@ export default function useComputer() {
         calzaProbability
       )
 
-      console.log(`maxBidProba : ${currentBidProbability}`)
-      console.log(`dudoProba : ${dudoProbability}`)
-      console.log(`calzaProba : ${calzaProbability}`)
+      console.log(' ')
+      console.log('Options:')
+      console.log(`Make bid max proba : ${currentBidProbability}`)
+      console.log(`Dudo proba : ${dudoProbability}`)
+      console.log(`Calza proba : ${calzaProbability}`)
 
+      console.log(' ')
+      console.log('Decision:')
       switch (maxProbability) {
         case currentBidProbability:
           setBidCount(player, computerBidCount)
           setBidValue(player, computerBidValue)
           computerPlay = { isPlaying: true, payload: 'makeBid' }
           console.log(
-            `bid - count: ${computerBidCount},  value: ${computerBidValue}`
+            `Make bid - count: ${computerBidCount},  dice: ${computerBidValue}`
           )
-          break
-        case dudoProbability:
-          computerPlay = { isPlaying: true, payload: 'dudo' }
-          console.log('dudo')
           break
         case calzaProbability:
           computerPlay = { isPlaying: true, payload: 'calza' }
-          console.log('calza')
+          console.log('Calza')
+          break
+        case dudoProbability:
+          computerPlay = { isPlaying: true, payload: 'dudo' }
+          console.log('Dudo')
           break
 
         default:
           break
       }
     }
+
+    console.log('______________')
 
     return computerPlay
   }
