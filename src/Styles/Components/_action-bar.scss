@@ -8,18 +8,45 @@
   gap: 32px;
   margin-top: 32px;
   transition: opacity 0.2s ease-out;
+  @include tablet-and-mobile {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 0px;
+    align-items: center;
+  }
   &.actionBar--displayed {
     height: fit-content;
     opacity: 1;
     transition: opacity 0.2s 0.2s ease-in;
   }
   &__bidBtn {
-    @include button
+    @include button;
+    @include tablet-and-mobile {
+      @include button(
+        $mobile-button-width,
+        $mobile-button-height,
+        $highlight-secondary
+      );
+    }
   }
   &__dudoBtn {
-    @include button
+    @include button;
+    @include tablet-and-mobile {
+      @include button(
+        $mobile-button-width,
+        $mobile-button-height,
+        $highlight-secondary
+      );
+    }
   }
   &__calzaBtn {
-    @include button
+    @include button;
+    @include tablet-and-mobile {
+      @include button(
+        $mobile-button-width,
+        $mobile-button-height,
+        $highlight-secondary
+      );
+    }
   }
 }

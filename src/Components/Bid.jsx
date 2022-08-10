@@ -2,7 +2,7 @@ import Dice from './Dice'
 import { v4 as uuidv4 } from 'uuid'
 import useBidData from '../hooks/useBidData'
 import useGameData from '../hooks/useGameData'
-import arrowIcon from '../Assets/Images/arrow.svg'
+import { ReactComponent as ArrowIcon } from '../Assets/Images/arrow.svg'
 
 export default function Bid(props) {
   const currentPlayer = props.playerData
@@ -21,7 +21,7 @@ export default function Bid(props) {
     : false
 
   return (
-    <div className="bid">
+    <div className={`bid${isHumanPlaying ? ' humanPlaying' : ''}`}>
       {isHumanPlaying && game.isPalifico && (
         <div className="bid__palificoSign">
           <span className="bid__palificoSign__letter">P</span>
@@ -41,20 +41,18 @@ export default function Bid(props) {
           {currentPlayer.bid.count ? currentPlayer.bid.count : ''}
         </div>
         {isHumanPlaying && (
-          <img
-            src={arrowIcon}
-            alt='flèche'
-            className="bid__countLeftArrow"
+          <ArrowIcon
+            alt="flèche"
+            className="bid__firstArrow fisrt"
             onClick={() => decreaseBidCount(currentPlayer)}
-          ></img>
+          />
         )}
         {isHumanPlaying && (
-          <img
-          src={arrowIcon}
-          alt='flèche'
-            className="bid__countRightArrow"
+          <ArrowIcon
+            alt="flèche"
+            className="bid__secondArrow first"
             onClick={() => increaseBidCount(currentPlayer)}
-          ></img>
+          />
         )}
       </div>
       <div className="bid__diceContainer">
@@ -66,20 +64,18 @@ export default function Bid(props) {
           isBidDice={true}
         />
         {isHumanPlaying && (
-          <img
-          src={arrowIcon}
-          alt='flèche'
-            className="bid__diceLeftArrow"
+          <ArrowIcon
+            alt="flèche"
+            className="bid__firstArrow last"
             onClick={() => decreaseBidValue(currentPlayer)}
-          ></img>
+          />
         )}
         {isHumanPlaying && (
-          <img
-          src={arrowIcon}
-          alt='flèche'
-            className="bid__diceRightArrow"
+          <ArrowIcon
+            alt="flèche"
+            className="bid__secondArrow last"
             onClick={() => increaseBidValue(currentPlayer)}
-          ></img>
+          />
         )}
       </div>
     </div>

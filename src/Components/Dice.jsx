@@ -18,7 +18,7 @@ export default function Dice({
   })
 
   return (
-    <div className="dice__container">
+    <div className={`dice__container${isBidDice ? ' bidDice' : ''}`}>
       <img src={diceEmptyFace} alt="dé" className={diceClass} />
       {changeIcon && (
         <img src={changeIcon} alt="modification du dé" className="dice__over" />

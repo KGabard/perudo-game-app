@@ -53,6 +53,10 @@ const initialState = {
     isDisplayed: false,
     height: 0,
   },
+  navigationMenu: {
+    isDisplayed: false,
+    height: 0,
+  },
   maxDicesPerPlayer: 5,
   maxPlayersNumber: 5,
   minPlayersNumber: 2,
@@ -133,6 +137,9 @@ const reducers = {
       case 'settings':
         state.settingsMenu.isDisplayed = false
         break
+      case 'navigation':
+        state.navigationMenu.isDisplayed = false
+        break
 
       default:
         break
@@ -143,6 +150,7 @@ const reducers = {
     state.controlsMenu.isDisplayed = false
     state.rulesMenu.isDisplayed = false
     state.settingsMenu.isDisplayed = false
+    state.navigationMenu.isDisplayed = false
 
     switch (action.payload) {
       case 'game':
@@ -156,6 +164,9 @@ const reducers = {
         break
       case 'settings':
         state.settingsMenu.isDisplayed = true
+        break
+      case 'navigation':
+        state.navigationMenu.isDisplayed = true
         break
 
       default:
@@ -198,6 +209,9 @@ const reducers = {
         break
       case 'settings':
         state.settingsMenu.height = action.payload.height
+        break
+      case 'navigation':
+        state.navigationMenu.height = action.payload.height
         break
 
       default:

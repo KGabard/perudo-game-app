@@ -2,4 +2,7 @@
   @include menu-component;
   margin-bottom: 16px;
   @include number-container;
+  @include tablet-and-mobile {
+    margin-bottom: 0;
+  }
 }

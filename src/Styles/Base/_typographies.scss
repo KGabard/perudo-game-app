@@ -52,3 +52,56 @@ $typographies: (
     font-style: italic,
   ),
 );
+
+$mobile-typographies: (
+  header: (
+    font-family: (
+      'Stick',
+      sans-serif,
+    ),
+    font-size: 32px,
+    font-weight: 400,
+    line-height: 32px,
+  ),
+  title: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 20px,
+    font-weight: 700,
+  ),
+  subtitle: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 14px,
+    font-weight: 400,
+  ),
+  body: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 12px,
+    font-weight: 400,
+  ),
+  body-highlight: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 12px,
+    font-weight: 700,
+  ),
+  body-italic: (
+    font-family: (
+      'Chivo',
+      sans-serif,
+    ),
+    font-size: 12px,
+    font-weight: 400,
+    font-style: italic,
+  ),
+);

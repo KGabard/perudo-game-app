@@ -23,21 +23,33 @@ $right-secondary: #56c621;
 $player-panel-width: 640px;
 $player-panel-height: 248px;
 $player-panel-height-expanded: 328px;
+$mobile-player-panel-width: 288px;
+$mobile-player-panel-height: 265px;
+$mobile-player-panel-height-expanded: 446px;
+
+$message-planel-width: 440px;
+$mobile-message-planel-width: 288px;
+
+$player-grid-height: 178px;
+$mobile-player-grid-height: 219px;
+$mobile-player-grid-height-expanded: 229px;
 
 $button-width: 144px;
 $button-height: 48px;
+$mobile-button-width: 120px;
+$mobile-button-height: 40px;
 
 $ok-button-width: 80px;
 $ok-button-height: 40px;
+$mobile-ok-button-width: 64px;
+$mobile-ok-button-height: 32px;
 
 $next-turn-button-width: 192px;
 $next-turn-button-height: 48px;
 
 $neon-delay: 0.1s;
 
-$arrow: url(../../Assets/Images/arrow.svg);
-$arrow-highlight: url(../../Assets/Images/arrowHighlight.svg);
-$arrow-neutral: url(../../Assets/Images/arrowNeutral.svg);
+$mobile-game-table-width: 600px;
 
 $dice-face-1: url(../../Assets/Images/DiceFace1.png);
 $dice-face-2: url(../../Assets/Images/DiceFace2.png);

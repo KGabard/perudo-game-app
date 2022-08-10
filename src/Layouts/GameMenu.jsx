@@ -76,7 +76,7 @@ export default function GameMenu() {
     <div className="gameMenu">
       <div onClick={closeMenu} className="gameMenu__overlay"></div>
       <div className="gameMenu__window" ref={windowRef}>
-        <h1 className="gameMenu__header">Nouvelle Partie ?</h1>
+        <h1 className="gameMenu__header">Nouvelle Partie</h1>
         <form onSubmit={handleSubmit(startGame)} className="gameMenu__form">
           <PlayersNumber
             playersNumber={numberOfPlayers}

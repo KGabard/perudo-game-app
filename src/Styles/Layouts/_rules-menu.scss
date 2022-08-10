@@ -1,8 +1,11 @@
 .rulesMenu {
     @include menu;
     &__window {
-        width: 640px;
+        width: $player-panel-width;
         gap: 0px;
+        @include tablet-and-mobile {
+            width: 90%;
+        }
     }
     &__title {
         margin-top: 16px;

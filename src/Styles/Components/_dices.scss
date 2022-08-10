@@ -3,6 +3,9 @@
   position: relative;
   margin: auto;
   gap: 8px;
+  @include tablet-and-mobile {
+    order: 2;
+  }
   &__list {
     display: flex;
     gap: 8px;

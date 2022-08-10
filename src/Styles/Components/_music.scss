@@ -16,6 +16,10 @@
       width: 56px;
       cursor: pointer;
       stroke: $basic-white;
+      @include tablet-and-mobile {
+        height: 48px;
+        width: 48px;
+      }
       &:hover {
         stroke: $neutral-secondary;
       }

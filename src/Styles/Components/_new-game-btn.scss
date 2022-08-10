@@ -8,6 +8,10 @@
   animation: pulse-animation 2s infinite;
   position: relative;
   align-self: end;
+  @include tablet-and-mobile {
+    height: 48px;
+    width: 184px;
+  }
   &:hover {
     animation: none;
   }

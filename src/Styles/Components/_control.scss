@@ -4,8 +4,11 @@
     gap: 8px;
     &__key {
         height: 56px;
+        @include tablet-and-mobile {
+            height: 48px;
+        }
     }
     &__label {
-        @include typographies(subtitle)
+        @include typographies(subtitle);
     }
 }

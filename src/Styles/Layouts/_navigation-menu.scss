@@ -1,0 +1,29 @@
+.navigationMenu {
+  @include menu;
+  &__window {
+    padding: 4px 0;
+  }
+  &__menusList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 1.5px;
+  }
+  &__link {
+    width: 67%;
+    @include typographies(subtitle);
+    text-align: center;
+    border-top: 3px solid $neutral-secondary;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: text-shadow 0.15s ease-in-out;
+    &:nth-child(1) {
+      border-top: none;
+    }
+    &:hover {
+        text-shadow: 0 0 10px $basic-white;
+    }
+  }
+}

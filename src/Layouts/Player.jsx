@@ -28,13 +28,14 @@ export default function Player(props) {
             />
             <h1 className="player__header__name">{currentPlayer.name}</h1>
           </div>
-          <div className={'player__separator'}></div>
+          <div className={'player__separator first'}></div>
           <div className="player__bidTitle">
             <h2>Enchère</h2>
           </div>
           <Dices playerData={currentPlayer} />
           <Bid playerData={currentPlayer} />
         </div>
+        <div className={'player__separator second'}></div>
         <ActionBar playerData={currentPlayer} panelRef={ref} />
       </div>
     </>

@@ -20,6 +20,7 @@ import usePlayersData from './hooks/usePlayersData'
 import { updateHasToPlay } from './redux/features/playersSlice'
 import useSoundEffects from './hooks/useSoundEffects'
 import useDices from './hooks/useDices'
+import NavigationMenu from './Layouts/NavigationMenu'
 
 function App() {
   const [homePageActive, setHomePageActive] = useState(true)
@@ -38,6 +39,7 @@ function App() {
     game.controlsMenu.isDisplayed ||
     game.rulesMenu.isDisplayed ||
     game.settingsMenu.isDisplayed ||
+    game.navigationMenu.isDisplayed ||
     game.dicesAreRolling
       ? dispatch(updateIsPause(true))
       : dispatch(updateIsPause(false))
@@ -49,6 +51,7 @@ function App() {
     game.controlsMenu.isDisplayed,
     game.rulesMenu.isDisplayed,
     game.settingsMenu.isDisplayed,
+    game.navigationMenu.isDisplayed,
     game.dicesAreRolling,
   ])
 
@@ -79,6 +82,7 @@ function App() {
         {game.controlsMenu.isDisplayed && <ControlsMenu />}
         {game.rulesMenu.isDisplayed && <RulesMenu />}
         {game.settingsMenu.isDisplayed && <SettingsMenu />}
+        {game.navigationMenu.isDisplayed && <NavigationMenu />}
         {gameTableActive && <GameTable />}
         {gameTableActive && <Footer />}
       </div>

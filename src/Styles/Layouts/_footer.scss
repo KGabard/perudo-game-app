@@ -12,7 +12,7 @@
         position: relative;
         top:20px;
         & .bold {
-            @include typographies(body-highlight);
+            @include typographies(body-highlight);            
         }
     }
 }

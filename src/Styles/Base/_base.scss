@@ -58,4 +58,8 @@ body {
   background-size: 1200px;
   background-repeat: no-repeat;
   background-position-x: center;
+  @include tablet-and-mobile {
+    background-size: 800px;
+    background-position-y: -100px;
+  }
 }

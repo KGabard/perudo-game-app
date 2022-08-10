@@ -6,6 +6,11 @@
   cursor: pointer;
   transform: scale(1);
   transition: transform 0.2s ease-in;
+  @include tablet-and-mobile {
+    align-self: center;
+    font-size: clamp(32px, 10vw, 48px);
+    margin-top: 24px;
+  }
   &__letter {
     animation-duration: 3s;
     animation-timing-function: linear;

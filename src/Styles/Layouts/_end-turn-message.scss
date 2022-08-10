@@ -70,6 +70,9 @@
   }
   &.expanded {
     width: $player-panel-width;
+    @include tablet-and-mobile {
+      width: 90%;
+    }
     & .endTurnMessage__body {
       opacity: 1;
       position: relative;

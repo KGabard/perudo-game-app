@@ -7,6 +7,7 @@
   position: relative;
   border-top: 3px solid $neutral-secondary;
   padding-top: 16px;
+  column-gap: 8px;
   &__label {
     grid-column: span 2;
     @include typographies(subtitle);
@@ -27,6 +28,10 @@
     padding: 0 4px;
     @include typographies(body);
     outline: none;
+    @include tablet-and-mobile {
+      width: 100%;
+      height: 22px;
+    }
     &.isInvalid {
       border: 3px solid $wrong-secondary;
     }
@@ -50,22 +55,15 @@
     justify-content: center;
     align-items: center;
     grid-row: span 2;
+    @include tablet-and-mobile {
+      width: 48px;
+      height: 48px;
+    }
     &.wrong {
       border: 3px solid $wrong-secondary;
     }
   }
-  &__upArrow {
-    @include arrow-btn($arrow, $arrow-neutral);
-    transform: rotate(0deg);
-    left: 2px;
-    bottom: -28px;
-  }
-  &__downArrow {
-    @include arrow-btn($arrow, $arrow-neutral);
-    transform: rotate(180deg);
-    right: 2px;
-    bottom: -28px;
-  }
+  @include arrows-selector;
   &__computerContainer {
     grid-column: span 2;
     justify-self: flex-end;
@@ -83,5 +81,9 @@
     border-radius: 2px;
     cursor: pointer;
     accent-color: $neutral-secondary;
+    @include tablet-and-mobile {
+      width: 11px;
+      height: 11px;
+    }
   }
 }

@@ -30,6 +30,16 @@
     width: 56px;
     height: 56px;
     position: relative;
+    @include tablet-and-mobile {
+      width: 40px;
+      height: 40px;
+    }
+    &.bidDice {
+      @include tablet-and-mobile {
+        width: 48px;
+        height: 48px;
+      }
+    }
   }
   &__over {
     position: absolute;
@@ -38,5 +48,9 @@
     height: 56px;
     top: 0px;
     left: 0px;
+    @include tablet-and-mobile {
+      width: 40px;
+      height: 40px;
+    }
   }
 }

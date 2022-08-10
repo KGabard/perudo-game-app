@@ -1,5 +1,5 @@
 import useGameData from '../hooks/useGameData'
-import arrowIcon from '../Assets/Images/arrow.svg'
+import { ReactComponent as ArrowIcon } from '../Assets/Images/arrow.svg'
 import { useDispatch } from 'react-redux'
 import {
   decreaseComputerSpeed,
@@ -15,18 +15,16 @@ export default function ComputerSpeed() {
       <p className="computerSpeed__label">Vitesse ordinateur :</p>
       <div className="computerSpeed__numberContainer">
         <div className="computerSpeed__number">{game.computerSpeed.speed}</div>
-        <img
+        <ArrowIcon
           onClick={() => dispatch(increaseComputerSpeed())}
-          src={arrowIcon}
-          className="computerSpeed__upArrow"
+          className="computerSpeed__secondArrow"
           alt="Flèche haut"
-        ></img>
-        <img
+          />
+        <ArrowIcon
           onClick={() => dispatch(decreaseComputerSpeed())}
-          src={arrowIcon}
-          className="computerSpeed__downArrow"
+          className="computerSpeed__firstArrow"
           alt="Flèche bas"
-        ></img>
+        />
       </div>
     </div>
   )

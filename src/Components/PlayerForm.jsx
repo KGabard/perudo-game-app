@@ -1,4 +1,4 @@
-import arrowIcon from '../Assets/Images/arrow.svg'
+import { ReactComponent as ArrowIcon } from '../Assets/Images/arrow.svg'
 import useGameData from '../hooks/useGameData'
 
 export default function PlayerForm({
@@ -37,18 +37,16 @@ export default function PlayerForm({
           alt="Avatar du joueur"
           className={'playerForm__avatar'}
         ></img>
-        <img
+        <ArrowIcon
           onClick={() => handleAvatarChange(currentIndex, 'previous')}
-          src={arrowIcon}
-          className="playerForm__upArrow"
+          className="playerForm__secondArrow"
           alt="Flèche haut"
-        ></img>
-        <img
+        />
+        <ArrowIcon
           onClick={() => handleAvatarChange(currentIndex, 'next')}
-          src={arrowIcon}
-          className="playerForm__downArrow"
+          className="playerForm__firstArrow"
           alt="Flèche bas"
-        ></img>
+        />
       </div>
       <div className="playerForm__computerContainer">
         <p className="playerForm__computerLabel">Ordinateur ?</p>

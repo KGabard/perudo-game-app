@@ -1,5 +1,27 @@
-// @mixin heading-shadow($colour:lightness-shift($colour-primary), $offset: $heading-shadow-size){
-//     text-shadow: $offset $offset $colour;
+@mixin tablet-and-mobile {
+  @media screen and (max-width: 800px) {
+    @content;
+  }
+}
+
+@mixin typographies($type) {
+  $typography: map-get($typographies, $type);
+  @each $attribute, $val in $typography {
+    #{$attribute}: #{$val};
+  }
+  @include tablet-and-mobile {
+    $typography: map-get($mobile-typographies, $type);
+    @each $attribute, $val in $typography {
+      #{$attribute}: #{$val};
+    }
+  }
+}
+
+// @mixin mobile-typographies($type) {
+//   $mobile-typography: map-get($mobile-typographies, $type);
+//   @each $attribute, $val in $mobile-typography {
+//     #{$attribute}: #{$val};
+//   }
 // }
 
 @mixin button(
@@ -23,36 +45,87 @@
   }
 }
 
-@mixin ok-btn($color: $neutral-secondary) {
-  @include button(80px, 40px);
-  border-color: $color;
-  &:hover {
-    background-color: $color;
-  }
-}
-
 @mixin message-window(
   $primary-color: $neutral-primary,
   $secondary-color: $neutral-secondary
 ) {
-  width: 440px;
+  width: $message-planel-width;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px;
+  padding: 32px 32px;
   gap: 16px;
   background-color: $primary-color;
   border: 3px solid $secondary-color;
   border-radius: 32px;
+  @include tablet-and-mobile {
+    width: $mobile-message-planel-width;
+    max-width: $mobile-game-table-width * 0.9;
+    border-radius: 24px;
+    padding: 24px 16px;
+  }
 }
 
-@mixin arrow-btn($arrow: $arrow, $hoveredArrow: $arrow-highlight) {
+@mixin arrow-btn($color: $basic-white, $hovered-color: $neutral-secondary) {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  content: $arrow;
+  align-self: center;
+  justify-self: center;
   cursor: pointer;
+  fill: $color;
+  transition: fill 0.15s ease-in-out;
+  @include tablet-and-mobile {
+    width: 23px;
+    height: 23px;
+  }
   &:hover {
-    content: $hoveredArrow;
+    fill: $hovered-color;
+  }
+}
+
+@mixin arrows-selector(
+  $color: $basic-white,
+  $hovered-color: $neutral-secondary,
+  $direction: vertical,
+  $position: first
+) {
+  &__firstArrow {
+    @include arrow-btn($color, $hovered-color);
+    @if $direction == vertical {
+      transform: rotate(180deg);
+    } @else if $direction == horizontal {
+      transform: rotate(-90deg);
+    }
+    @include tablet-and-mobile {
+      align-self: end;
+      &.first {
+        grid-column: 1;
+        grid-row: 2 / 3;
+      }
+      &.last {
+        grid-column: -1;
+        grid-row: 2 / 3;
+      }
+    }
+  }
+  &__secondArrow {
+    @include arrow-btn($color, $hovered-color);
+    @if $direction == vertical {
+      transform: rotate(0deg);
+    } @else if $direction == horizontal {
+      transform: rotate(90deg);
+    }
+    @include tablet-and-mobile {
+      align-self: start;
+      &.first {
+        grid-column: 1;
+        grid-row: 1 / 2;
+      }
+      &.last {
+        grid-column: -1;
+        grid-row: 1 / 2;
+      }
+    }
   }
 }
 
@@ -79,18 +152,33 @@
     margin: 112px 0 64px;
     width: fit-content;
     position: relative;
+    @include tablet-and-mobile {
+      margin: 72px 0 64px;
+    }
   }
   &__header {
     width: 100%;
-    text-align: center;
     @include typographies(header);
+    white-space: nowrap;
+    text-align: center;
     margin-bottom: 16px;
+    @include tablet-and-mobile {
+      margin-bottom: 8px;
+    }
   }
   &__okBtn {
     align-self: end;
     margin-top: 16px;
     @include button($ok-button-width, $ok-button-height, $neutral-secondary);
     color: $basic-white;
+    @include tablet-and-mobile {
+      @include button(
+        $mobile-ok-button-width,
+        $mobile-ok-button-height,
+        $neutral-secondary
+      );
+      margin-top: 8px;
+    }
   }
 }
 
@@ -101,6 +189,9 @@
   align-items: center;
   position: relative;
   gap: 32px;
+  @include tablet-and-mobile {
+    gap: 8px;
+  }
   &__label {
     @include typographies(subtitle);
   }
@@ -122,87 +213,14 @@
     border: 3px solid $basic-white;
     border-radius: 8px;
     grid-row: span 2;
-    // outline: none;
-    // caret-color: transparent;
-    // color: $basic-white;
-    // background: transparent;
-    // text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     @include typographies(title);
+    @include tablet-and-mobile {
+      width: 48px;
+      height: 48px;
+    }
   }
-  &__upArrow {
-    @include arrow-btn($arrow, $arrow-neutral);
-    transform: rotate(0deg);
-    left: 2px;
-    bottom: -28px;
-  }
-  &__downArrow {
-    @include arrow-btn($arrow, $arrow-neutral);
-    transform: rotate(180deg);
-    right: 2px;
-    bottom: -28px;
-  }
-}
-
-@mixin tablet-and-mobile {
-  @media screen and (max-width: 888px) {
-    @content;
-  }
-}
-
-@mixin tablet-only {
-  @media screen and (max-width: 888px) and (min-width: 426px) {
-    @content;
-  }
-}
-
-@mixin mobile-only {
-  @media screen and (max-width: 426px) {
-    @content;
-  }
-}
-
-@mixin mobile-only-375 {
-  @media screen and (max-width: 376px) {
-    @content;
-  }
-}
-
-@mixin mobile-only-320 {
-  @media screen and (max-width: 330px) {
-    @content;
-  }
-}
-
-@mixin position-center($width, $height) {
-  position: absolute;
-  left: calc(50% - $width / 2);
-  top: calc(50% - $height / 2);
-}
-
-@mixin position-bottom-center($width, $height) {
-  position: absolute;
-  left: calc(50% - $width / 2);
-  top: calc(100% - $height / 2);
-}
-
-@mixin position-top-center($width, $height) {
-  position: absolute;
-  left: calc(50% - $width / 2);
-  top: calc(0% - $height / 2);
-}
-
-@mixin position-left-center($width, $height) {
-  position: absolute;
-  left: calc(0% - $width / 2);
-  top: calc(50% - $height / 2);
-}
-
-@mixin typographies($type) {
-  $typography: map-get($typographies, $type);
-  @each $attribute, $val in $typography {
-    #{$attribute}: #{$val};
-  }
+  @include arrows-selector;
 }

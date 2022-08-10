@@ -4,7 +4,22 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 64px;
+    @include tablet-and-mobile {
+        padding: 0px 32px;
+    }
     &__logo {
         height: 56px;
+        @include tablet-and-mobile {
+            height: 40px;
+        }
+    }
+    &__header {
+        display: none;
+        @include typographies(header);
+        position: relative;
+        top:-3px;
+        @include tablet-and-mobile {
+            display: block;
+        }
     }
 }

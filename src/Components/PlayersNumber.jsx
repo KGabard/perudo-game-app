@@ -1,4 +1,4 @@
-import arrowIcon from '../Assets/Images/arrow.svg'
+import { ReactComponent as ArrowIcon } from '../Assets/Images/arrow.svg'
 
 export default function PlayersNumber({
   playersNumber,
@@ -10,54 +10,17 @@ export default function PlayersNumber({
       <p className="playersNumber__label">Nombre de joueurs ?</p>
       <div className="playersNumber__numberContainer">
         <div className="playersNumber__number">{playersNumber}</div>
-        <img
+        <ArrowIcon
           onClick={() => addPlayer()}
-          src={arrowIcon}
-          className="playersNumber__upArrow"
+          className="playersNumber__secondArrow"
           alt="Flèche haut"
-        ></img>
-        <img
+        />
+        <ArrowIcon
           onClick={() => removePlayer()}
-          src={arrowIcon}
-          className="playersNumber__downArrow"
+          className="playersNumber__firstArrow"
           alt="Flèche bas"
-        ></img>
+        />
       </div>
     </div>
   )
 }
-
-// import arrowIcon from '../Assets/Images/arrow.svg'
-
-// export default function PlayersNumber({
-//   playersNumber,
-//   increasePlayersNumber,
-//   decreasePlayersNumber,
-// }) {
-//   return (
-//     <div className="playersNumber">
-//       <p className="playersNumber__label">Nombre de joueurs ?</p>
-//       <div className="playersNumber__numberContainer">
-//         <input
-//           type="number"
-//           value={playersNumber}
-//           onChange={() => {}}
-//           name="playersNumber"
-//           className="playersNumber__number"
-//         />
-//         <img
-//           onClick={() => increasePlayersNumber()}
-//           src={arrowIcon}
-//           className="playersNumber__upArrow"
-//           alt="Flèche haut"
-//         ></img>
-//         <img
-//           onClick={() => decreasePlayersNumber()}
-//           src={arrowIcon}
-//           className="playersNumber__downArrow"
-//           alt="Flèche bas"
-//         ></img>
-//       </div>
-//     </div>
-//   )
-// }

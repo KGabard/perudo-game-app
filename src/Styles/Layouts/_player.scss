@@ -19,21 +19,43 @@
   transition: background-color 0.1s 0.3s ease-out,
     border-color 0.1s 0.3s ease-out, transform 0.3s ease-out,
     height 0.3s ease-out;
+  @include tablet-and-mobile {
+    width: $mobile-player-panel-width;
+    height: $mobile-player-panel-height;
+    padding: 16px 8px 24px;
+  }
   &.active {
     transform: scale(1.05);
     @include change-colors($highlight-primary, $highlight-secondary);
     &.human {
       height: $player-panel-height-expanded;
+      @include tablet-and-mobile {
+        height: $mobile-player-panel-height-expanded;
+        & .player__grid {
+          height: $mobile-player-grid-height-expanded;
+        }
+        & .player__separator.first {
+          margin-top: 34px;
+        }
+        & .player__separator.second {
+          display: block;
+        }
+      }
     }
   }
   &__grid {
     width: 100%;
-    height: 178px;
+    height: $player-grid-height;
     display: grid;
     grid-template-columns: 380px auto 1fr;
     grid-template-rows: auto 1fr;
     justify-content: center;
     align-items: center;
+    @include tablet-and-mobile {
+      height: $mobile-player-grid-height;
+      display: flex;
+      flex-direction: column;
+    }
   }
   &__header {
     display: flex;
@@ -42,22 +64,38 @@
     width: 100%;
     position: relative;
     height: 80px;
+    @include tablet-and-mobile {
+      height: 40px;
+      padding-left: 52px;
+      padding-right: 52px;
+      order: 1;
+      margin-bottom: 16px;
+    }
     &__avatar {
       width: 80px;
       height: 80px;
       position: absolute;
       left: 0;
+      @include tablet-and-mobile {
+        width: 40px;
+        height: 40px;
+        left: 16px;
+      }
     }
     &__name {
       @include typographies(header);
+      overflow: hidden;
     }
   }
   &__bidTitle {
     width: 100%;
-    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include tablet-and-mobile {
+      order: 4;
+      margin-bottom: 8px;
+    }
     & h2 {
       @include typographies(title);
     }
@@ -69,6 +107,19 @@
     border-radius: 3px;
     grid-row: span 2;
     transition: border-color 0.1s 0.3s ease-out;
+    @include tablet-and-mobile {
+      order: 3;
+      width: 67%;
+      height: 0px;
+      border-left: none;
+      border-top: 3px solid $neutral-secondary;
+      margin-top: 24px;
+      margin-bottom: 16px;
+    }
+    &.second {
+      display: none;
+      margin: 16px auto;
+    }
   }
   &.wrong {
     @include change-colors($wrong-primary, $wrong-secondary);
