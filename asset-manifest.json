@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/perudo-game-app/static/css/main.fd678b10.css",
-    "main.js": "/perudo-game-app/static/js/main.1e07713a.js",
+    "main.css": "/perudo-game-app/static/css/main.e6564c62.css",
+    "main.js": "/perudo-game-app/static/js/main.16fcbcee.js",
     "static/media/panflute.wav": "/perudo-game-app/static/media/panflute.945b6bc3b3538d91540c.wav",
     "static/media/hangdrum.wav": "/perudo-game-app/static/media/hangdrum.5cff2aa2bd1f2af46cd6.wav",
     "static/media/leafBackground.png": "/perudo-game-app/static/media/leafBackground.1eced3b2cfc67f66716c.png",
@@ -31,22 +31,21 @@
     "static/media/DiceFace4.png": "/perudo-game-app/static/media/DiceFace4.5ef12fd934c5fc14502d.png",
     "static/media/DiceFace3.png": "/perudo-game-app/static/media/DiceFace3.41bbc6f0cac252e2c263.png",
     "static/media/DiceFace2.png": "/perudo-game-app/static/media/DiceFace2.e181c83599a99547fe67.png",
+    "static/media/music-change.svg": "/perudo-game-app/static/media/music-change.1f8b4f6113abebeb64d87fb7212af45e.svg",
+    "static/media/speaker-on.svg": "/perudo-game-app/static/media/speaker-on.09efa72b4124e91425acb7b601111eee.svg",
+    "static/media/music-play.svg": "/perudo-game-app/static/media/music-play.5f19522a6c8a936111f13f31c61df514.svg",
+    "static/media/music-pause.svg": "/perudo-game-app/static/media/music-pause.52b99ca5b8483535782c071f20a49b90.svg",
+    "static/media/speaker-off.svg": "/perudo-game-app/static/media/speaker-off.0c9433f1b6cd70ba5fbd759d4389402a.svg",
     "static/media/PlusIcon.svg": "/perudo-game-app/static/media/PlusIcon.3964212221c2ade965201a5d5b84b90b.svg",
     "static/media/arrow.svg": "/perudo-game-app/static/media/arrow.bc0bfd0285b85ef72631a6d1629c13ec.svg",
     "index.html": "/perudo-game-app/index.html",
     "static/media/CrossIcon.svg": "/perudo-game-app/static/media/CrossIcon.b5ab9ca2607e7fceb47c43b162415d18.svg",
-    "static/media/soundOff.svg": "/perudo-game-app/static/media/soundOff.44a4b1fc14d9d44b2819e77fcab5cd52.svg",
-    "static/media/musicPlay.svg": "/perudo-game-app/static/media/musicPlay.213483d83462e1dff18aea91879fddaa.svg",
-    "static/media/soundOn.svg": "/perudo-game-app/static/media/soundOn.b8c0029df4eb1d78d11870624ebc1b97.svg",
-    "static/media/musicPrev.svg": "/perudo-game-app/static/media/musicPrev.85fc65c45b222e6e9b4c6f3dee245a18.svg",
-    "static/media/musicNext.svg": "/perudo-game-app/static/media/musicNext.b4fdbb80e97dcf2b294fcdb8fde2d53b.svg",
-    "static/media/musicPause.svg": "/perudo-game-app/static/media/musicPause.0e1f7871ccad022e0e320881e1ab68d2.svg",
     "static/media/hamburger.svg": "/perudo-game-app/static/media/hamburger.d32a86a9807519429b2f2e60b10a3b37.svg",
-    "main.fd678b10.css.map": "/perudo-game-app/static/css/main.fd678b10.css.map",
-    "main.1e07713a.js.map": "/perudo-game-app/static/js/main.1e07713a.js.map"
+    "main.e6564c62.css.map": "/perudo-game-app/static/css/main.e6564c62.css.map",
+    "main.16fcbcee.js.map": "/perudo-game-app/static/js/main.16fcbcee.js.map"
   },
   "entrypoints": [
-    "static/css/main.fd678b10.css",
-    "static/js/main.1e07713a.js"
+    "static/css/main.e6564c62.css",
+    "static/js/main.16fcbcee.js"
   ]
 }
