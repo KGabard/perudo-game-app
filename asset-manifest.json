@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/perudo-game-app/static/css/main.6fd6222d.css",
-    "main.js": "/perudo-game-app/static/js/main.9a357d37.js",
+    "main.js": "/perudo-game-app/static/js/main.eaf7243d.js",
     "static/media/panflute.wav": "/perudo-game-app/static/media/panflute.945b6bc3b3538d91540c.wav",
     "static/media/hangdrum.wav": "/perudo-game-app/static/media/hangdrum.5cff2aa2bd1f2af46cd6.wav",
     "static/media/leaf-background.png": "/perudo-game-app/static/media/leaf-background.1eced3b2cfc67f66716c.png",
@@ -42,10 +42,10 @@
     "static/media/icon-cross.svg": "/perudo-game-app/static/media/icon-cross.b5ab9ca2607e7fceb47c43b162415d18.svg",
     "static/media/hamburger.svg": "/perudo-game-app/static/media/hamburger.d32a86a9807519429b2f2e60b10a3b37.svg",
     "main.6fd6222d.css.map": "/perudo-game-app/static/css/main.6fd6222d.css.map",
-    "main.9a357d37.js.map": "/perudo-game-app/static/js/main.9a357d37.js.map"
+    "main.eaf7243d.js.map": "/perudo-game-app/static/js/main.eaf7243d.js.map"
   },
   "entrypoints": [
     "static/css/main.6fd6222d.css",
-    "static/js/main.9a357d37.js"
+    "static/js/main.eaf7243d.js"
   ]
 }
