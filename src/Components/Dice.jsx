@@ -1,6 +1,6 @@
 import React from 'react'
 import useDice from '../hooks/useDice'
-import diceEmptyFace from '../Assets/Images/DiceFaceEmpty.png'
+import diceEmptyFace from '../Assets/Images/dice-face-empty.png'
 
 export default function Dice({
   value,

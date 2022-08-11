@@ -4,12 +4,15 @@
     height: 56px;
     margin-right: 16px;
     cursor: pointer;
+    stroke-width: 0.5;
     stroke: $basic-white;
+    fill: $basic-white;
     @include tablet-and-mobile {
       height: 48px;
     }
     &:hover {
       stroke: $neutral-secondary;
+      fill: $neutral-secondary;
     }
   }
 }

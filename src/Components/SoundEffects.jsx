@@ -1,5 +1,5 @@
-import { ReactComponent as SoundOn } from '../Assets/Images/soundOn.svg'
-import { ReactComponent as SoundOff } from '../Assets/Images/soundOff.svg'
+import { ReactComponent as SpeakerOn } from '../Assets/Images/speaker-on.svg'
+import { ReactComponent as SpeakerOff } from '../Assets/Images/speaker-off.svg'
 import { useDispatch } from 'react-redux'
 import { toggleSoundEffectsMute } from '../redux/features/gameSlice'
 import useGameData from '../hooks/useGameData'
@@ -12,12 +12,12 @@ export default function SoundEffects() {
     <div className="soundEffects">
       <p className="soundEffects__label">Effets sonores :</p>
       {game.soundEffects.muted ? (
-        <SoundOff
+        <SpeakerOff
           className="soundEffects__mute"
           onClick={() => dispatch(toggleSoundEffectsMute())}
         />
       ) : (
-        <SoundOn
+        <SpeakerOn
           className="soundEffects__mute"
           onClick={() => dispatch(toggleSoundEffectsMute())}
         />

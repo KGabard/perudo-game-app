@@ -6,10 +6,9 @@ import {
   previousMusic,
   toggleIsMusicPlaying,
 } from '../redux/features/gameSlice'
-import { ReactComponent as PlayBtn } from '../Assets/Images/musicPlay.svg'
-import { ReactComponent as PauseBtn } from '../Assets/Images/musicPause.svg'
-import { ReactComponent as NextBtn } from '../Assets/Images/musicNext.svg'
-import { ReactComponent as PrevBtn } from '../Assets/Images/musicPrev.svg'
+import { ReactComponent as PlayBtn } from '../Assets/Images/music-play.svg'
+import { ReactComponent as PauseBtn } from '../Assets/Images/music-pause.svg'
+import { ReactComponent as ChangeBtn } from '../Assets/Images/music-change.svg'
 
 export default function Music() {
   const { game } = useGameData()
@@ -22,10 +21,10 @@ export default function Music() {
         currentMusic.name[0].toUpperCase() + currentMusic.name.substring(1)
       }`}</p>
       <div className="music__player">
-        <PrevBtn
+        <ChangeBtn
           onClick={() => dispatch(previousMusic())}
           alt="Bouton précédent"
-          className="music__prevBtn"
+          className="music__changeBtn prev"
         />
         {game.music.isPlaying ? (
           <PauseBtn
@@ -40,10 +39,10 @@ export default function Music() {
             className="music__playBtn"
           />
         )}
-        <NextBtn
+        <ChangeBtn
           onClick={() => dispatch(nextMusic())}
           alt="Bouton suivant"
-          className="music__nextBtn"
+          className="music__changeBtn next"
         />
       </div>
     </div>

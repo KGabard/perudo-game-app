@@ -1,7 +1,7 @@
 import makeBidSoundURL from '../Assets/Audio/make-bid.wav'
 import wrongSoundURL from '../Assets/Audio/wrong.wav'
 import validSoundURL from '../Assets/Audio/valid.wav'
-import diceRollSoundURL from '../Assets/Audio/dice-roll2.wav'
+import diceRollSoundURL from '../Assets/Audio/dice-roll.wav'
 import errorSoundURL from '../Assets/Audio/error.wav'
 import useGameData from './useGameData'
 

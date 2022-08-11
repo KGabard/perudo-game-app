@@ -7,6 +7,13 @@ export default function Dices(props) {
   const currentPlayer = props.playerData
   const { disabledDices, showDices, hideDices } = useDices()
 
+  const handleShowAction = () => {
+    if (currentPlayer.areDicesDisplayed) return
+    console.log('show')
+    showDices(currentPlayer)
+    setTimeout(() => hideDices(currentPlayer), 2000)
+  }
+
   return (
     <>
       <div className="dices">
@@ -43,9 +50,10 @@ export default function Dices(props) {
         </ul>
         {!currentPlayer.isComputer && currentPlayer.isActive && (
           <button
-            onMouseDown={() => showDices(currentPlayer)}
-            onMouseUp={() => hideDices(currentPlayer)}
-            onMouseOut={() => hideDices(currentPlayer)}
+            // onMouseDown={() => showDices(currentPlayer)}
+            // onMouseUp={() => hideDices(currentPlayer)}
+            // onMouseOut={() => hideDices(currentPlayer)}
+            onClick={handleShowAction}
             className={'dices__showBtn'}
           >
             Montrer

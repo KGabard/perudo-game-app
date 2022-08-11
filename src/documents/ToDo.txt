@@ -1,7 +1,7 @@
 
 
-
-- Rédiger le readme : Expliquer le projet et les technos utilisées
+- Régler le problème "montrer" les dés qui ne fonctionne pas sur écran tactile.
+- Rédiger le readme : Expliquer le projet et les technos utilisées (mettre le lien vers le site hébergé sur github)
 
 
 

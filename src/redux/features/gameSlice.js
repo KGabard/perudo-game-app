@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import playerImage1 from '../../Assets/Images/PlayerImage1.png'
-import playerImage2 from '../../Assets/Images/PlayerImage2.png'
-import playerImage3 from '../../Assets/Images/PlayerImage3.png'
-import playerImage4 from '../../Assets/Images/PlayerImage4.png'
-import playerImage5 from '../../Assets/Images/PlayerImage5.png'
-import playerImage6 from '../../Assets/Images/PlayerImage6.png'
+import playerImage1 from '../../Assets/Images/player-image-1.png'
+import playerImage2 from '../../Assets/Images/player-image-2.png'
+import playerImage3 from '../../Assets/Images/player-image-3.png'
+import playerImage4 from '../../Assets/Images/player-image-4.png'
+import playerImage5 from '../../Assets/Images/player-image-5.png'
+import playerImage6 from '../../Assets/Images/player-image-6.png'
 
 import hangdrumMusic from '../../Assets/Audio/hangdrum.wav'
 import panfluteMusic from '../../Assets/Audio/panflute.wav'

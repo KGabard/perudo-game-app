@@ -1,0 +1,84 @@
+ToDo :
+check eliminate Player
+
+
+usePlayersData :
+ok activePlayers
+ok eliminatedPlayers
+ok totalPlayersDices
+ok maxPlayerIndex
+ok previousPlayer			(ne plus utiliser player.index faire en fonction des index du tableau activePlayers)
+ok nextPlayer				(ne plus utiliser player.index faire en fonction des index du tableau activePlayers)
+ok activatePlayer
+ok desactivateAllPlayers
+ok resetPlayer
+ok eliminatePlayer 
+
+ok enlever "updateIndex(player)"
+
+
+
+useGameData :
+ok game
+ok maxDicesPerPlayer
+ok checkIsPalifico (Boucle sur tous les joueurs, vérifier si un joueur est Wrong et n'a plus qu'un dé) 
+
+
+useBidData :
+ok currentBid
+ok checkBidProposal
+ok checkBid
+
+ok fusionner avec useBid ?
+
+
+
+
+usePlay :		(a faire en dernier, essayer de faire fonctionner l'appli avant)
+- play
+- hasToPlay
+- computerPlay
+
+
+useActions :
+ok makeBid
+ok endTurn
+ok Executer checkIsPalifico (useGameData) à la fin de endTurn
+
+
+useEndTurnMessage :
+ok createEndTurnMessage (en fonction de la vérif de l'enchère)
+ok describeBidCheck
+ok nextTurn
+? hideEndTurnMessage
+? displayEndTurnMessage
+? expandEndTurnMessage
+
+
+
+useErrorMessage :
+? displayErrorMessage
+? hideErrorMessage
+
+
+useDices :
+ok disabledDices
+ok showDices
+ok hideDices
+ok hidePlayersDices
+ok showPlayersDices
+ok randomizePlayerDices
+ok resetPlayerDiceChanges
+ok removeDice
+ok addDice
+ok countDice
+ok countDiceOf
+
+
+
+
+
+
+
+
+

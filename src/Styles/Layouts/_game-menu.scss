@@ -16,5 +16,8 @@
     align-self: end;
     position: relative;
     top: 12px;
+    @include tablet-and-mobile {
+      top: 2px;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import crossIcon from '../Assets/Images/CrossIcon.svg'
-import plusIcon from '../Assets/Images/PlusIcon.svg'
+import crossIcon from '../Assets/Images/icon-cross.svg'
+import plusIcon from '../Assets/Images/icon-plus.svg'
 import useGameData from './useGameData'
 
 export default function useDice({

@@ -10,18 +10,24 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
-    gap: 0px;
+    gap: 8px;
     & svg {
       height: 56px;
       width: 56px;
       cursor: pointer;
-      stroke: $basic-white;
+      fill: $basic-white;
+      &.next {
+        transform: rotate(90deg);
+      }
+      &.prev {
+        transform: rotate(-90deg) scaleX(-1);
+      }
       @include tablet-and-mobile {
         height: 48px;
         width: 48px;
       }
       &:hover {
-        stroke: $neutral-secondary;
+        fill: $neutral-secondary;
       }
     }
   }
