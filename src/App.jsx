@@ -17,7 +17,6 @@ import {
   updateIsPause,
 } from './redux/features/gameSlice'
 import usePlayersData from './hooks/usePlayersData'
-import { updateHasToPlay } from './redux/features/playersSlice'
 import useSoundEffects from './hooks/useSoundEffects'
 import useDices from './hooks/useDices'
 import NavigationMenu from './Layouts/NavigationMenu'

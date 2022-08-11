@@ -16,7 +16,6 @@ export default function Dices(props) {
     timerRef.current = setTimeout(() => {
       hideDices(currentPlayer)
     }, 2000)
-    console.log(timerRef)
   }
 
   useEffect(() => {
