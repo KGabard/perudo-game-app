@@ -18,7 +18,7 @@ export default function useActions() {
   const { nextPlayer, previousPlayer, desactivateAllPlayers } = usePlayersData()
   const { setBidCount, setBidValue, checkBidProposal, checkBid, previousBid } =
     useBidData()
-  const { removeDice, addDice, showPlayersDices } = useDices()
+  const { hideDices, removeDice, addDice, showPlayersDices } = useDices()
   const { createEndTurnMessage } = useEndTurnMessage()
 
   const { playSound } = useSoundEffects()
@@ -40,6 +40,7 @@ export default function useActions() {
       setBidCount(nextPlayer(player), player.bid.count)
       setBidValue(nextPlayer(player), player.bid.value)
       dispatch(updateHasToPlay({ player: nextPlayer(player), hasToPlay: true }))
+      hideDices(player)
       playSound('makeBid')
     }
   }

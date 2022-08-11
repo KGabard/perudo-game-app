@@ -1,6 +1,5 @@
 
 
-- Régler le problème "montrer" les dés qui ne fonctionne pas sur écran tactile.
 - Rédiger le readme : Expliquer le projet et les technos utilisées (mettre le lien vers le site hébergé sur github)
 
 
@@ -15,3 +14,4 @@ x Ajouter des effets sonores ?
 x Ajouter des animations ? (ex: dés qui roulent)
 x Régler le bug quand l'ordi commence la partie
 x Gérer le responsive sur petit écran
+x Régler le problème "montrer" les dés qui ne fonctionne pas sur écran tactile.

@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Dice from './Dice'
 import { v4 as uuidv4 } from 'uuid'
 import useDices from '../hooks/useDices'
+import { useEffect } from 'react'
 
 export default function Dices(props) {
   const currentPlayer = props.playerData
   const { disabledDices, showDices, hideDices } = useDices()
 
+  const timerRef = useRef(null)
+
   const handleShowAction = () => {
-    if (currentPlayer.areDicesDisplayed) return
-    console.log('show')
+    clearTimeout(timerRef.current)
     showDices(currentPlayer)
-    setTimeout(() => hideDices(currentPlayer), 2000)
+    timerRef.current = setTimeout(() => {
+      hideDices(currentPlayer)
+    }, 2000)
+    console.log(timerRef)
   }
+
+  useEffect(() => {
+    if (!currentPlayer.isActive) {
+      clearTimeout(timerRef.current)
+    }
+  }, [currentPlayer.isActive])
 
   return (
     <>
