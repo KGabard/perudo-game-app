@@ -24,10 +24,12 @@
   }
   &__expandBtn {
     @include typographies(body-italic);
+    // text-decoration: underline;
+    border-bottom: 1px solid $basic-white;
     width: fit-content;
     text-align: justify;
     cursor: pointer;
-    transition: color 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, border 0.15s ease-in-out;
     &:hover {
       color: $neutral-secondary;
     }
@@ -42,6 +44,7 @@
     & .endTurnMessage__expandBtn {
       &:hover {
         color: $wrong-secondary;
+        border-color: $wrong-secondary;
       }
     }
     & .endTurnMessage__nextTurnBtn {
@@ -58,6 +61,7 @@
     & .endTurnMessage__expandBtn {
       &:hover {
         color: $right-secondary;
+        border-color: $right-secondary;
       }
     }
     & .endTurnMessage__nextTurnBtn {
