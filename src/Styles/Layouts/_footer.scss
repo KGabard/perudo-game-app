@@ -1,6 +1,6 @@
 .footer {
-    height: 96px;
-    background: linear-gradient(180deg, transparent 0%, $neutral-primary 55%);
+    height: 196px;
+    background: linear-gradient(180deg, transparent 0%, $neutral-primary 60%);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     @include typographies(body);
     &__text {
         position: relative;
-        top:20px;
+        top:64px;
         & .bold {
             @include typographies(body-highlight);            
         }
